@@ -2,7 +2,7 @@ import { Footer } from "../components/Footer/Footer"
 import HeaderAboutUs from "../components/HeaderSections/HeaderAboutUs"
 import HeroSection from "../components/HeroSection/HeroSection"
 import Logos from "../components/Logos/Logos"
-import LandingNavBar from "../components/NavBar/LanfingNavBar"
+import LandingNavBar from "../components/NavBar/LandingNavBar"
 import Stats from "../components/Stats/Stats"
 
 export default function Landing() {
