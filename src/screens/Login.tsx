@@ -1,12 +1,13 @@
 import InputField from "../components/Inputs/InputField"
+import Logo from '../assets/icon1.png'
 
 export default function Login() {
     return (
         <section className="bg-gray-50">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-                    <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"></img>
-                    Allpa    
+                    <img className="w-6 h-8 mr-2" src={Logo} alt="logo"></img>
+                    <p className="font-logo text-3xl text-primary-700">Allpa</p> 
                 </a>
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
