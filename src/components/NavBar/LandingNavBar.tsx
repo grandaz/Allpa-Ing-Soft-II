@@ -3,6 +3,7 @@ import GreenButton from '../Inputs/GreenButton'
 
 export default function LandingNavBar() {
     return (
+        <>
         <nav className="bg-white light:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 light:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/inicio" className="flex items-center">
@@ -32,6 +33,7 @@ export default function LandingNavBar() {
                 </div>
             </div>
         </nav>
-
+        <div className="h-16"></div>
+        </>
     )
 }
