@@ -6,6 +6,7 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import GreenButton from "../Inputs/GreenButton";
 
 function CardProducto() {
     return (
@@ -26,6 +27,8 @@ function CardProducto() {
                         $95.00
                     </Typography>
                 </div>
+
+                {/*
                 <Typography
                     variant="small"
                     color="gray"
@@ -34,15 +37,10 @@ function CardProducto() {
                     With plenty of talk and listen time, voice-activated Siri access, and
                     an available wireless charging case.
                 </Typography>
+    */}
             </CardBody>
             <CardFooter className="pt-0">
-                <Button
-                    ripple={false}
-                    fullWidth={true}
-                    className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                >
-                    Add to Cart
-                </Button>
+                <GreenButton type="button" label="Add to Cart"></GreenButton>
             </CardFooter>
         </Card>
     );
