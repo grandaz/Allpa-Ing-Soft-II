@@ -6,48 +6,48 @@ function Pedidos() {
     let pedidos = [
         {
             id: 1,
-            logoEmpresa: 'https://api.freelogodesign.org/assets/thumb/logo/a17b07eb64d341ffb1e09392aa3a1698_400.png',
-            empresa: "Justin House",
+            logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
+            empresa: "Wong",
             fecha: "14/05/24",
-            producto: "iaculis odio.",
+            producto: "Papa",
             detalle: "in felis. Nulla tempor augue ac ipsum. Phasellus vitae",
-            precio: 6.62
+            cant: 1000
         },
         {
             id: 2,
-            logoEmpresa: 'https://api.freelogodesign.org/assets/thumb/logo/a17b07eb64d341ffb1e09392aa3a1698_400.png',
-            empresa: "Wendy Bush",
+            logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
+            empresa: "Tottus",
             fecha: "16/06/23",
-            producto: "Quisque purus",
+            producto: "Uvas",
             detalle: "dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec,",
-            precio: 6.92
+            cant: 690
         },
         {
             id: 3,
-            logoEmpresa: 'https://api.freelogodesign.org/assets/thumb/logo/a17b07eb64d341ffb1e09392aa3a1698_400.png',
-            empresa: "Nina Santana",
+            logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
+            empresa: "Wong",
             fecha: "24/05/23",
-            producto: "convallis erat,",
+            producto: "Quinoa",
             detalle: "risus, at fringilla purus mauris a nunc. In at",
-            precio: 7.77
+            cant: 900
         },
         {
             id: 4,
-            logoEmpresa: 'https://api.freelogodesign.org/assets/thumb/logo/a17b07eb64d341ffb1e09392aa3a1698_400.png',
-            empresa: "Nolan Pruitt",
+            logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
+            empresa: "Wong",
             fecha: "03/09/24",
-            producto: "Curabitur massa.",
+            producto: "Azucar",
             detalle: "aliquet nec, imperdiet nec, leo. Morbi",
-            precio: 6.68
+            cant: 200
         },
         {
             id: 5,
-            logoEmpresa: 'https://api.freelogodesign.org/assets/thumb/logo/a17b07eb64d341ffb1e09392aa3a1698_400.png',
-            empresa: "Madonna Padilla",
+            logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
+            empresa: "Wong",
             fecha: "22/09/23",
-            producto: "ultrices. Duis",
+            producto: "Zanahoria",
             detalle: "in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula",
-            precio: 8.99
+            cant: 150
         }
     ]
 
@@ -64,7 +64,7 @@ function Pedidos() {
                             fecha={element.fecha}
                             producto={element.producto}
                             detalle={element.detalle}
-                            precio={element.precio}
+                            cant={element.cant}
                         ></CardPedido>
                     ))}
             </div>
