@@ -6,7 +6,7 @@ import AboutUs from './screens/AboutUs'
 import Inicio from './screens/Inicio'
 import Pedidos from './screens/Pedidos'
 import Productos from './screens/Productos'
-import Prueba from './screens/Prueba'
+import MisPedidos from './screens/MisPedidos'
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
         <Route path='/pedidos' element={<Pedidos/>}/>
         <Route path='/productos' element={<Productos/>}/>
         <Route path='/nosotros' element={<AboutUs/>}/>
-        <Route path='/prueba' element={<Prueba/>}/>
+        <Route path='/prueba' element={<MisPedidos/>}/>
       </Routes>
     </BrowserRouter>
   )
