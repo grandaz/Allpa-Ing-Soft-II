@@ -6,8 +6,9 @@ import AboutUs from './screens/AboutUs'
 import Inicio from './screens/Inicio'
 import Pedidos from './screens/Pedidos'
 import Productos from './screens/Productos'
-import Prueba from './screens/Prueba'
+import MisPedidos from './screens/MisPedidos'
 import Support from './screens/Support'
+import CrearPedido from './screens/CrearPedido'
 
 export default function App() {
   return (
@@ -21,8 +22,9 @@ export default function App() {
         <Route path='/pedidos' element={<Pedidos/>}/>
         <Route path='/productos' element={<Productos/>}/>
         <Route path='/nosotros' element={<AboutUs/>}/>
-        <Route path='/prueba' element={<Prueba/>}/>
+        <Route path='/MisPedidos' element={<MisPedidos/>}/>
         <Route path='/soporte' element={<Support/>}/>
+        <Route path='/CrearPedido' element={<CrearPedido/>}/>
       </Routes>
     </BrowserRouter>
   )

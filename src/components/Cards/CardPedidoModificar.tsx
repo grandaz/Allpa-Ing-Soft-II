@@ -13,7 +13,7 @@ interface CardPedidoProps {
   fecha: string
   producto: string
   detalle: string
-  precio: number
+  cant: number
 }
 
 function CardPedidoModificar(props: CardPedidoProps) {
@@ -40,7 +40,7 @@ function CardPedidoModificar(props: CardPedidoProps) {
             {props.producto}
           </Typography>
           <Typography color="blue-gray" className="font-medium">
-            {'$' + props.precio}
+            {props.cant + " " + "kg"}
           </Typography>
         </div>
         <Typography

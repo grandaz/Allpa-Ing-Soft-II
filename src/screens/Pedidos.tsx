@@ -1,4 +1,4 @@
-import LandingNavBar from "../components/NavBar/LandingNavBar"
+import LandingNavBar from "../components/NavBar/LandingNavBarCanasta"
 import CardPedido from "../components/Cards/CardPedido"
 
 function Pedidos() {
@@ -16,7 +16,7 @@ function Pedidos() {
         {
             id: 2,
             logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
-            empresa: "Tottus",
+            empresa: "Wong",
             fecha: "16/06/23",
             producto: "Uvas",
             detalle: "dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec,",
