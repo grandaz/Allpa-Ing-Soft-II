@@ -1,9 +1,9 @@
-import LandingNavBar from "../components/NavBar/LandingNavBar"
+import LandingNavBarInicio from "../components/NavBar/LandingNavBarIncio"
 
 function Inicio() {
     return (
         <>
-        <LandingNavBar></LandingNavBar>
+        <LandingNavBarInicio></LandingNavBarInicio>
         </>
     )
 }
