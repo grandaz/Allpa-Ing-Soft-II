@@ -1,9 +1,14 @@
 import LandingNavBar from "../components/NavBar/LandingNavBarCanasta"
 import CardPedido from "../components/Cards/CardPedido"
+import { Component } from "react"
 
-function Pedidos() {
+interface PedidosPageProps {
 
-    let pedidos = [
+}
+
+class PedidosPage extends Component<PedidosPageProps> {
+
+    pedidos = [
         {
             id: 1,
             logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
@@ -51,28 +56,31 @@ function Pedidos() {
         }
     ]
 
-    return (
-        <>
-            <LandingNavBar></LandingNavBar>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Destacados</h2>
-            <div className="flex flex-wrap gap-20 justify-center mx-auto">
-                {pedidos.map(element => (
-                        <CardPedido 
-                            key={element.id}
-                            logoEmpresa={element.logoEmpresa} 
-                            empresa={element.empresa}
-                            fecha={element.fecha}
-                            producto={element.producto}
-                            detalle={element.detalle}
-                            cant={element.cant}
-                        ></CardPedido>
-                    ))}
-            </div>
+    constructor(props: PedidosPageProps) {
+        super(props);
+    }
 
-
-
-        </>
-    )
+    render() {
+        return (
+            <>
+                <LandingNavBar></LandingNavBar>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Destacados</h2>
+                <div className="flex flex-wrap gap-20 justify-center mx-auto">
+                    {this.pedidos.map(element => (
+                            <CardPedido 
+                                key={element.id}
+                                logoEmpresa={element.logoEmpresa} 
+                                empresa={element.empresa}
+                                fecha={element.fecha}
+                                producto={element.producto}
+                                detalle={element.detalle}
+                                cant={element.cant}
+                            ></CardPedido>
+                        ))}
+                </div>
+            </>
+        )
+    }
 }
 
-export default Pedidos
+export default PedidosPage

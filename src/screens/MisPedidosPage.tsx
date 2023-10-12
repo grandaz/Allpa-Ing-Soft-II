@@ -1,9 +1,14 @@
 import LandingNavBarCanasta from "../components/NavBar/LandingNavBarCanasta"
 import CardPedidoModificar from "../components/Cards/CardPedidoModificar"
+import { Component } from "react"
 
-function MisPedidos() {
+interface MisPedidosPageProps {
 
-    let pedidos = [
+}
+
+class MisPedidosPage extends Component<MisPedidosPageProps> {
+
+    pedidos = [
         {
             id: 1,
             logoEmpresa: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png',
@@ -51,25 +56,33 @@ function MisPedidos() {
         }
     ]
 
-    return (
-        <>
-            <LandingNavBarCanasta></LandingNavBarCanasta>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Mis pedidos</h2>
-            <div className="flex flex-wrap gap-20 justify-center mx-auto">
-                {pedidos.map(element => (
-                        <CardPedidoModificar 
-                            key={element.id}
-                            logoEmpresa={element.logoEmpresa} 
-                            empresa={element.empresa}
-                            fecha={element.fecha}
-                            producto={element.producto}
-                            detalle={element.detalle}
-                            cant={element.cant}
-                        ></CardPedidoModificar>
-                    ))}
-            </div>
-        </>
-    )
+    constructor(props: MisPedidosPageProps) {
+        super(props)
+        
+    }
+
+    render() {
+        return (
+            <>
+                <LandingNavBarCanasta></LandingNavBarCanasta>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Mis pedidos</h2>
+                <div className="flex flex-wrap gap-20 justify-center mx-auto">
+                    {this.pedidos.map(element => (
+                            <CardPedidoModificar 
+                                key={element.id}
+                                logoEmpresa={element.logoEmpresa} 
+                                empresa={element.empresa}
+                                fecha={element.fecha}
+                                producto={element.producto}
+                                detalle={element.detalle}
+                                cant={element.cant}
+                            ></CardPedidoModificar>
+                        ))}
+                </div>
+            </>
+        )
+    }
+    
 }
 
-export default MisPedidos
+export default MisPedidosPage

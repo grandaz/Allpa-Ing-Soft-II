@@ -1,19 +1,30 @@
 import { Footer } from "../components/Footer/Footer"
-import HeaderAboutUs from "../components/HeaderSections/HeaderAboutUs"
 import Nosotros from "../components/BodySection/Nostros"
 import Logos from "../components/Logos/Logos"
 import LandingNavBar from "../components/NavBar/LandingNavBar"
 import Stats from "../components/Stats/Stats"
+import { Component } from "react"
 
-export default function Landing() {
-    return (
-        <>
+interface AboutUsPageProps {
+
+}
+
+class AboutUsPage extends Component<AboutUsPageProps> {
+    constructor(props: AboutUsPageProps) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <>
             <LandingNavBar></LandingNavBar>
             <Nosotros></Nosotros>
             <Stats></Stats>
             <Logos></Logos>
             <Footer></Footer>
         </>
-
-    )
+        )
+    }
 }
+
+export default AboutUsPage

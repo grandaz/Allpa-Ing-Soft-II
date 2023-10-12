@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import Logo from '../../assets/logo1_icon.png'
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 export default function LandingNavBar() {
 
@@ -12,6 +14,10 @@ export default function LandingNavBar() {
                     <a href="/inicio" className="flex items-center">
                         <img src={Logo} className="h-8 mr-3" alt="Allpa Logo"></img>
                     </a>
+                    <div className="flex md:order-2">
+                        <a href='#' className='pr-5'><ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon></a>
+                        <a href='#'><AccountCircleOutlinedIcon></AccountCircleOutlinedIcon></a>
+                    </div>
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
                             <li>
