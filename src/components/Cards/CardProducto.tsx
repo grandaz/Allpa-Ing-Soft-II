@@ -4,11 +4,18 @@ import {
     CardBody,
     CardFooter,
     Typography,
-    Button,
 } from "@material-tailwind/react";
 import GreenButton from "../Inputs/GreenButton";
+import { useNavigate } from "react-router-dom";
 
 function CardProducto() {
+
+    const navigate = useNavigate();
+
+    const navigateToContacts = () => {
+        navigate('/crearPedido');
+    };
+
     return (
         <Card className="w-96">
             <CardHeader shadow={false} floated={false} className="h-96">
@@ -37,11 +44,10 @@ function CardProducto() {
                     With plenty of talk and listen time, voice-activated Siri access, and
                     an available wireless charging case.
                 </Typography>
-    */}
+            */}
             </CardBody>
             <CardFooter className="pt-0">
-                <GreenButton type="button" label="Añadir"></GreenButton>
-                
+                <GreenButton type="button" label="Añadir" onClick={navigateToContacts}></GreenButton>
             </CardFooter>
         </Card>
     );
