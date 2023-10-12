@@ -32,6 +32,17 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
         }
     ]
 
+    unidades = [
+        {
+            id: 1,
+            nombre: 'kg'
+        },
+        {
+            id: 2,
+            nombre: 'unidades'
+        },
+    ]
+
     constructor(props: CrearPedidoPageProps) {
         super(props);
 
@@ -62,12 +73,17 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Título</label>
                         <InputField type={'text'}></InputField>
                     </div>
+                    <div className="grid gap-6 md:grid-cols-5">
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Producto</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Cantidad</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Precio unitario</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Unidad</label>
+                    </div>
                     {
                         this.state.listaProductosForm.map((_, index) => (
-                            <div key={index} className="grid gap-6 mb-5 md:grid-cols-4">
+                            <div key={index} className="grid gap-6 mb-5 md:grid-cols-5">
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Producto</label>
-                                    <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600">
+                                    <select id="productos" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600">
                                         {
                                             this.productos.map(element => (
                                                 <option key={element.id}>{element.nombre}</option>
@@ -76,16 +92,23 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                                     </select>
                                 </div>
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Cantidad</label>
                                     <InputField type={'text'}></InputField>
                                 </div>
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Precio</label>
                                     <InputField type={'text'}></InputField>
                                 </div>
+                                <div>
+                                    <select id="unidades" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600">
+                                        {
+                                            this.unidades.map(element => (
+                                                <option key={element.id}>{element.nombre}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
                                 <div className="flex items-end">
-                                    <input onClick={() => this.agregarProducto()} type="button" value="Agregar" className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mx-2 mb-0.5"></input>
-                                    <input onClick={() => this.eliminarProducto(index)} type="button" value="Eliminar" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mx-2 mb-0.5"></input>
+                                    <button onClick={() => this.agregarProducto()} type="button" className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mx-2 mb-0.5">Agregar</button>
+                                    <button onClick={() => this.eliminarProducto(index)} type="button" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mx-2 mb-0.5 disabled:bg-gray-200" disabled={this.state.listaProductosForm.length === 1}>Eliminar</button>
                                 </div>
                             </div>
                         ))
@@ -98,7 +121,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Descripción</label>
                         <InputField type={'text'}></InputField>
                     </div>
-                    <div className="w-20"><GreenButton label="Publicar"></GreenButton></div>
+                    <div className="w-28 m-auto"><GreenButton label="Publicar"></GreenButton></div>
                 </form>
             </>
         )
