@@ -17,7 +17,7 @@ interface CardPedidoProps {
   cant: number
 }
 
-class CardPedido extends Component<CardPedidoProps> {
+class CardPedidoModificar extends Component<CardPedidoProps> {
 
   constructor(props: CardPedidoProps) {
     super(props);
@@ -59,13 +59,17 @@ class CardPedido extends Component<CardPedidoProps> {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <a href="/detallePedido"><GreenButton type="button" label="Inscribirse"></GreenButton></a>
+          <div className="flex">
+            <GreenButton type="button" label="Modificar"></GreenButton>
+            <div className="w-4"></div>
+            <GreenButton type="button" label="Eliminar"></GreenButton>
+          </div>
         </CardFooter>
       </Card>
-    )
+    );
   }
 
 
 }
 
-export default CardPedido
+export default CardPedidoModificar

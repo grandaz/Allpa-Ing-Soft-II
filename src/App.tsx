@@ -1,29 +1,41 @@
-import Landing from './screens/Landing'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './screens/Login'
-import SignIn from './screens/SignIn'
-import AboutUs from './screens/AboutUs'
-import Inicio from './screens/Inicio'
-import Pedidos from './screens/Pedidos'
-import Productos from './screens/Productos'
-import Prueba from './screens/Prueba'
-import Support from './screens/Support'
+import LandingPage from './screens/LandingPage'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import LoginPage from './screens/LoginPage'
+import SignInPage from './screens/SignInPage'
+import AboutUsPage from './screens/AboutUsPage'
+import InicioPage from './screens/InicioPage'
+import PedidosPage from './screens/PedidosPage'
+import ProductosPage from './screens/ProductosPage'
+import MisPedidosPage from './screens/MisPedidosPage'
+import SupportPage from './screens/SupportPage'
+import CrearPedidoPage from './screens/CrearPedidoPage'
+import LandingNavBar from './components/NavBar/LandingNavBar'
+import { Component } from 'react'
+import QuickViewPedido from './components/DetallePedido/DetallePedido'
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Landing/>}/>
-        <Route path='/landing' element={<Landing/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<SignIn/>}/>
-        <Route path='/inicio' element={<Inicio/>}/>
-        <Route path='/pedidos' element={<Pedidos/>}/>
-        <Route path='/productos' element={<Productos/>}/>
-        <Route path='/nosotros' element={<AboutUs/>}/>
-        <Route path='/prueba' element={<Prueba/>}/>
-        <Route path='/soporte' element={<Support/>}/>
-      </Routes>
-    </BrowserRouter>
-  )
+export default class App extends Component {
+
+  render() {
+    return (
+      <Router>
+        <LandingNavBar></LandingNavBar>
+        <Switch>
+          <Route exact path='/' component={LandingPage} />
+          <Route path='/landing' component={LandingPage} />
+          <Route path='/login' component={LoginPage} />
+          <Route path='/register' component={SignInPage} />
+          <Route path='/inicio' component={InicioPage} />
+          <Route path='/pedidos' component={PedidosPage} />
+          <Route path='/productos' component={ProductosPage} />
+          <Route path='/nosotros' component={AboutUsPage} />
+          <Route path='/misPedidos' component={MisPedidosPage} />
+          <Route path='/soporte' component={SupportPage} />
+          <Route path='/crearPedido' component={CrearPedidoPage} />
+          <Route path='/detallePedido' component={QuickViewPedido} />
+        </Switch>
+      </Router>
+    )
+  }
+
+
 }
