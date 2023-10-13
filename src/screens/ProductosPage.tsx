@@ -15,7 +15,7 @@ class ProductosPage extends Component<ProductosPageProps> {
     render() {
         return (
             <>
-            <LandingNavBar></LandingNavBar>
+            <div className="mt-20"></div>
             <div className="flex flex-wrap gap-20 justify-center">
                     <CardProducto></CardProducto>
                     <CardProducto></CardProducto>

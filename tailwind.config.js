@@ -16,10 +16,16 @@ export default {
       },
       fontFamily: {
         'logo': ['"Advent Pro"']
-      }
+      },
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [
+    require('flowbite/plugin'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
   fontFamily: {
     'body': [
       'Inter', 

@@ -67,8 +67,9 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
     render() {
         return (
             <>
-                <LandingNavBar></LandingNavBar>
-                <form className="mx-20 my-10">
+            <div className="mt-24"></div>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8 ml-48">Realiza un pedido</h2>
+                <form className="mx-48 my-10">
                     <div className="mb-5">
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Título</label>
                         <InputField type={'text'}></InputField>

@@ -59,7 +59,7 @@ class CardPedido extends Component<CardPedidoProps> {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <GreenButton type="button" label="Inscribirse"></GreenButton>
+          <a href="/detallePedido"><GreenButton type="button" label="Inscribirse"></GreenButton></a>
         </CardFooter>
       </Card>
     )

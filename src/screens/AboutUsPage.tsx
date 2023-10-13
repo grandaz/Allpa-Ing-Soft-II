@@ -17,7 +17,7 @@ class AboutUsPage extends Component<AboutUsPageProps> {
     render() {
         return (
             <>
-            <LandingNavBar></LandingNavBar>
+            <div className="mt-18"></div>
             <Nosotros></Nosotros>
             <Stats></Stats>
             <Logos></Logos>

@@ -17,7 +17,6 @@ class SupportPage extends Component<SupportPageProps> {
     render() {
         return (
             <>
-                <LandingNavBar></LandingNavBar>
                 <Soporte></Soporte>
                 <Logos></Logos>
                 <Footer></Footer>
