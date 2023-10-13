@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const  URI = 'https:// postgresql-testchatbot.alwaysdata.net:5432';
+const  URI = 'https://postgresql-testchatbot.alwaysdata.net:5432';
 
 const get = async (endpoint) => {
     try {
