@@ -1,4 +1,5 @@
 import { LinkProps } from "./InputProps"
+import { Component } from "react"
 
 function GreenLink(props: LinkProps) {
     return (

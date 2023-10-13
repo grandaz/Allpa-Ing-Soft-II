@@ -1,4 +1,8 @@
-export default function Logos() {
+import { Component } from "react"
+
+class Logos extends Component {
+
+  render() {
     return (
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -46,4 +50,8 @@ export default function Logos() {
       </div>
     )
   }
-  
+
+
+}
+
+export default Logos

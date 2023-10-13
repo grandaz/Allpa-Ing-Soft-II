@@ -1,10 +1,14 @@
+import { Component } from "react"
+
 const links = [
-    { name: 'Respeto', href: '#' },
-    { name: 'Responsabilidad', href: '#' },
-    { name: 'Integridad', href: '#' },
-  ]
-  
-  export default function HeaderAboutUs() {
+  { name: 'Respeto', href: '#' },
+  { name: 'Responsabilidad', href: '#' },
+  { name: 'Integridad', href: '#' },
+]
+
+class HeaderAboutUs extends Component {
+
+  render() {
     return (
       <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
         <img
@@ -56,4 +60,8 @@ const links = [
       </div>
     )
   }
-  
+
+}
+
+
+export default HeaderAboutUs

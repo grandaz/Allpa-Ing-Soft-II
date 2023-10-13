@@ -1,4 +1,4 @@
-import LandingNavBar from "../components/NavBar/LandingNavBarCanasta"
+
 import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
 
@@ -63,7 +63,7 @@ class PedidosPage extends Component<PedidosPageProps> {
     render() {
         return (
             <>
-                <LandingNavBar></LandingNavBar>
+
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Destacados</h2>
                 <div className="flex flex-wrap gap-20 justify-center mx-auto">
                     {this.pedidos.map(element => (

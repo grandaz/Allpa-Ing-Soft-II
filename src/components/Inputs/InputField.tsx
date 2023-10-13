@@ -1,4 +1,5 @@
 import { InputProps } from "./InputProps"
+import { Component } from "react"
 
 function InputField(props: InputProps) {
     return (

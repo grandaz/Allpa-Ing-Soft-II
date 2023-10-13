@@ -1,4 +1,4 @@
-import LandingNavBarCanasta from "../components/NavBar/LandingNavBarCanasta"
+
 import CardPedidoModificar from "../components/Cards/CardPedidoModificar"
 import { Component } from "react"
 
@@ -64,7 +64,6 @@ class MisPedidosPage extends Component<MisPedidosPageProps> {
     render() {
         return (
             <>
-                <LandingNavBarCanasta></LandingNavBarCanasta>
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Mis pedidos</h2>
                 <div className="flex flex-wrap gap-20 justify-center mx-auto">
                     {this.pedidos.map(element => (

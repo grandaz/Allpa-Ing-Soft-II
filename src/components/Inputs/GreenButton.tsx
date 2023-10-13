@@ -1,4 +1,4 @@
-
+import { Component } from "react"
 import { ButtonProps } from "./InputProps"
 
 function GreenButton(props: ButtonProps) {

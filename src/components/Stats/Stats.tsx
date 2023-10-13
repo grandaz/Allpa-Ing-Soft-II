@@ -1,10 +1,14 @@
+import { Component } from "react"
+
 const stats = [
-    { id: 1, name: 'Multiples Productos'},
-    { id: 2, name: 'Efectividad'},
-    { id: 3, name: 'Confianza'},
-  ]
-  
-  export default function Stats() {
+  { id: 1, name: 'Multiples Productos' },
+  { id: 2, name: 'Efectividad' },
+  { id: 3, name: 'Confianza' },
+]
+
+class Stats extends Component {
+
+  render() {
     return (
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -19,4 +23,7 @@ const stats = [
       </div>
     )
   }
-  
+
+}
+
+export default Stats
