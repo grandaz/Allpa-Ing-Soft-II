@@ -2,17 +2,13 @@ import InputField from "../components/Inputs/InputField"
 import Logo from '../assets/icon1.png'
 import { Link } from "react-router-dom"
 import { Component } from "react"
+import ProductoAPI from './../api/products'
 import UserAPI from './../api/user'
 
 interface LoginPageProps{
 
 }
 
-const users: Promise<any> = UserAPI.findAll()
-
-users.then(users => {
-    console.log(users)
-})
 
 class LoginPage extends Component<LoginPageProps>{
 

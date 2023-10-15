@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class Base {
 
-    static URI: string = 'https://postgresql-testchatbot.alwaysdata.net:5432';
+    static URI: string = 'http://localhost:3001';
 
     static async get(endpoint: string): Promise<any> {
         try {
