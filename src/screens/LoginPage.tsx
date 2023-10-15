@@ -8,8 +8,11 @@ interface LoginPageProps{
 
 }
 
-const users = UserAPI.findAll();
-console.log(users);
+const users: Promise<any> = UserAPI.findAll()
+
+users.then(users => {
+    console.log(users)
+})
 
 class LoginPage extends Component<LoginPageProps>{
 
