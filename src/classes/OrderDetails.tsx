@@ -7,6 +7,7 @@ export default class OrderDetails {
     private _titulo: string;
     private _descripcion: string;
     private _fecha_entrega: string;
+    private _direccion: string;
     private _createdAt: string;
     private _updatedAt: string;
     private _user?: User;
@@ -18,6 +19,7 @@ export default class OrderDetails {
         titulo: string,
         descripcion: string,
         fecha_entrega: string,
+        direccion: string,
         createdAt: string,
         updatedAt: string,
         user?: User
@@ -28,6 +30,7 @@ export default class OrderDetails {
         this._titulo = titulo;
         this._descripcion = descripcion;
         this._fecha_entrega = fecha_entrega;
+        this._direccion = direccion;
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
         this._user = user;
@@ -79,6 +82,14 @@ export default class OrderDetails {
 
     set fecha_entrega(fecha_entrega: string) {
         this._fecha_entrega = fecha_entrega;
+    }
+
+    get direccion(): string {
+        return this._direccion;
+    }
+
+    set direccion(direccion: string) {
+        this._direccion = direccion;
     }
 
     get createdAt(): string {

@@ -4,6 +4,7 @@ export default class OrderItems {
     private _product_id: number;
     private _cuantity: number;
     private _measure_id: number;
+    private _price: number;
     private _createdAt: string;
     private _updatedAt: string;
 
@@ -13,6 +14,7 @@ export default class OrderItems {
         product_id: number,
         cuantity: number,
         measure_id: number,
+        price: number,
         createdAt: string,
         updatedAt: string
     ) {
@@ -21,6 +23,7 @@ export default class OrderItems {
         this._product_id = product_id;
         this._cuantity = cuantity;
         this._measure_id = measure_id;
+        this._price = price;
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
     }
@@ -63,6 +66,14 @@ export default class OrderItems {
 
     set measure_id(measure_id: number) {
         this._measure_id = measure_id;
+    }
+
+    get price(): number {
+        return this._price;
+    }
+
+    set price(price: number) {
+        this._price = price;
     }
 
     get createdAt(): string {

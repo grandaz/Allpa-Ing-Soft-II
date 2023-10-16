@@ -3,9 +3,22 @@ import Base from './base'
 class OrderDetailsAPI {
 
     private static endpoint: string = '/order_detail';
-
+    /*
     static async create(request: string) {
         return await Base.post(this.endpoint, request);
+    }
+    */
+    
+    static async create(orderDetailObj: any) {
+        try {
+            // Ensure that orderDetailObj matches the expected structure of your API and database
+            const response = await Base.post(this.endpoint, orderDetailObj);
+            console.log('POST Response:', response); // Log the response for debugging
+            return response.data;
+        } catch (error) {
+            console.error('Error creating order detail:', error);
+            throw error;
+        }
     }
 
     
