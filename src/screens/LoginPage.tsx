@@ -2,18 +2,31 @@ import InputField from "../components/Inputs/InputField"
 import Logo from '../assets/icon1.png'
 import { Link } from "react-router-dom"
 import { Component } from "react"
-import ProductoAPI from './../api/products'
-import UserAPI from './../api/user'
+import personaAPI from "../api/user"
+
+interface Login {
+    id: number;
+    name: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+}
 
 interface LoginPageProps{
+    persona: Persona[];
+}
 
+interface LoginPageState{
+    persona: Persona[];
 }
 
 class LoginPage extends Component<LoginPageProps>{
 
-
     constructor(props: LoginPageProps) {
         super(props);
+        this.state = {
+            persona: []
+        }
     }
 
     render() {
@@ -49,9 +62,9 @@ class LoginPage extends Component<LoginPageProps>{
                                     </div>
                                     <a href="#" className="text-sm font-medium text-primary-600 hover:underline">Forgot password?</a>
                                 </div>
-                                <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"><Link to="http://localhost:5173/Inicio">Sign in</Link></button>
+                                <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"><Link to="/Inicio">Sign in</Link></button>
                                 <p className="text-sm font-light text-gray-500">
-                                    Don't have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline"><Link to="http://localhost:5173/register">Sign up</Link></a>
+                                    Don't have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline"><Link to="/register">Sign up</Link></a>
                                 </p>
                             </form>
                         </div>
@@ -64,3 +77,76 @@ class LoginPage extends Component<LoginPageProps>{
 }
 
 export default LoginPage
+
+
+/*
+import LandingNavBar from "../components/NavBar/LandingNavBar"
+import CardProducto from "../components/Cards/CardProducto"
+import { Component } from "react"
+import ProductoAPI from "../api/products"
+
+interface Product {
+    id: number;
+    name: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+  }
+  
+  interface ProductosPageProps {
+    productos: Product[];
+  }
+  
+  interface ProductosPageState {
+    productos: Product[];
+  }
+  
+
+
+class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
+
+    constructor(props: ProductosPageProps) {
+        super(props);
+        this.state = {
+            productos: []
+        }
+    }
+
+    componentDidMount() {
+        this.cargarProductos();
+      }
+
+    cargarProductos() {
+        ProductoAPI.findAll()
+            .then((promise) => {
+                const products = promise.data;
+                this.setState({ productos: products });
+                console.log(products);
+            })
+            .catch((error) => {
+                // Handle errors here
+                console.error("Error loading products:", error);
+            });
+        
+    }
+
+    render() {
+        return (
+            <>
+            <div className="mt-20"></div>
+            <div className="flex flex-wrap gap-20 justify-center">
+                {
+                    this.state.productos.map((producto) => (
+                        <CardProducto nombre={producto.name} image={producto.image}></CardProducto>
+                    ))
+                }
+            </div>
+            </>
+        )
+    }
+
+    
+}
+
+export default ProductosPage
+*/
