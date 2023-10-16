@@ -8,14 +8,23 @@ import {
 import GreenButton from "../Inputs/GreenButton";
 import { Component } from "react"
 
-class CardProducto extends Component {
+interface CardProductoProps {
+    nombre: string;
+    image: string;
+}
+
+class CardProducto extends Component<CardProductoProps> {
+
+    constructor(props: CardProductoProps) {
+        super(props);
+    }
 
     render() {
         return (
             <Card className="w-96">
                 <CardHeader shadow={false} floated={false} className="h-96">
                     <img
-                        src="https://nutricionyfarmacia.com/blog/wp-content/uploads/2022/09/Uvas.jpg"
+                        src={this.props.image}
                         alt="card-image"
                         className="h-full w-full object-cover"
                     />
@@ -23,7 +32,7 @@ class CardProducto extends Component {
                 <CardBody>
                     <div className="mb-2 flex items-center justify-between">
                         <Typography color="blue-gray" className="font-medium">
-                            Uvas
+                            {this.props.nombre}
                         </Typography>
                         <Typography color="blue-gray" className="font-medium">
                             +
