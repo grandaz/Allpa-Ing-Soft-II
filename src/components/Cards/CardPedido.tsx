@@ -9,12 +9,12 @@ import GreenButton from "../Inputs/GreenButton";
 import { Component } from "react"
 
 interface CardPedidoProps {
-  logoEmpresa: string
-  empresa: string
-  fecha: string
-  producto: string
-  detalle: string
-  cant: number
+  profileImage: string
+  nombre: string
+  fechaCrea: string
+  titulo: string
+  descripcion: string
+  fechaEntrega: string
 }
 
 class CardPedido extends Component<CardPedidoProps> {
@@ -28,15 +28,15 @@ class CardPedido extends Component<CardPedidoProps> {
       <Card className="w-96">
         <CardHeader shadow={false} floated={false} className="h-26">
           <div className="flex items-center space-x-4">
-            <img className="w-10 h-10 rounded-full" src={this.props.logoEmpresa} alt=""></img>
+            <img className="w-10 h-10 rounded-full" src={this.props.profileImage} alt=""></img>
             <div className="font-medium dark:text-white">
-              <div>{this.props.empresa}</div>
+              <div>{this.props.nombre}</div>
               <Typography
                 variant="small"
                 color="gray"
                 className="font-normal opacity-75"
               >
-                Publicado: {this.props.fecha}
+                Publicado: {this.props.fechaCrea}
               </Typography>
             </div>
           </div>
@@ -44,10 +44,10 @@ class CardPedido extends Component<CardPedidoProps> {
         <CardBody>
           <div className="mb-2 flex items-center justify-between">
             <Typography color="blue-gray" className="font-medium">
-              {this.props.producto}
+              {this.props.titulo}
             </Typography>
             <Typography color="blue-gray" className="font-medium">
-              {this.props.cant + " " + "kg"}
+              {this.props.fechaEntrega}
             </Typography>
           </div>
           <Typography
@@ -55,7 +55,7 @@ class CardPedido extends Component<CardPedidoProps> {
             color="gray"
             className="font-normal opacity-75"
           >
-            {this.props.detalle}
+            {this.props.descripcion}
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
