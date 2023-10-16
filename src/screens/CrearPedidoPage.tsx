@@ -111,18 +111,29 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
   };
 
   handleDynamicInputChange(index: number, event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    const values = [...this.state.listaProductosForm];
-    values[index][event.target.name] = event.target.value;
-    this.setState({
-      listaProductosForm: values,
-    });
+    if (index < 0 || index >= this.state.listaProductosForm.length) {
+      return;
+    }
+  
+    this.setState((prevState) => ({
+      listaProductosForm: prevState.listaProductosForm.map((item, i) => {
+        if (i === index) {
+          return {
+            ...item,
+            [event.target.name]: event.target.value,
+          };
+        }
+        return item;
+      }),
+    }));
   }
+
 
   private handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
-    });
+    } as unknown as Pick<CrearPedidoPageState, keyof CrearPedidoPageState>);
   }
 
   private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -142,7 +153,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
     OrderDetailsAPI.create(orderDetailObj)
       .then((data) => {
         console.log('Order detail created successfully:', data);
-        orderId = data.ordetail_id; // Use the correct property name for order_id
+        orderId = data.ordetail_id;
         console.log(orderId);
       })
       .then(() => {
