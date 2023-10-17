@@ -2,7 +2,7 @@ import InputField from "../components/Inputs/InputField"
 import Logo from '../assets/icon1.png'
 import { Link } from "react-router-dom"
 import { Component } from "react"
-import UserAPI from "../api/user"
+import UserAPI from './../api/user'
 import User from "../classes/User"
 
 interface LoginPageProps { }
@@ -11,7 +11,6 @@ interface LoginPageState {
     users: User[];
     email: string;
     password: string;
-    errors: string[];
 }
 
 class LoginPage extends Component<LoginPageProps, LoginPageState>{
@@ -22,7 +21,6 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
             users: [],
             email: '',
             password: '',
-            errors: [],
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -71,39 +69,6 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
             console.log('User not found');
         }
     }
-    
-    IniciarSesion = () => {
-        const { email, password } = this.state;
-      
-        // Validar correo electrónico
-        if (!email || !email.trim()) {
-          this.setState({ errors: ['El correo electrónico es obligatorio.'] });
-          return;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-          this.setState({ errors: ['El correo electrónico no es válido.'] });
-          return;
-        }
-      
-        // Validar contraseña
-        if (!password || !password.trim()) {
-          this.setState({ errors: ['La contraseña es obligatoria.'] });
-          return;
-        } else if (password.length < 6) {
-          this.setState({ errors: ['La contraseña debe tener al menos 6 caracteres.'] });
-          return;
-        }
-      
-        // Realizar la petición al backend
-        UserAPI.findAll()
-            .then((promise) => {
-                const data = promise.data;
-                this.setState({ users: data });
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error("Error cargando usuarios:", error);
-            });
-    };
 
     render() {
         return (
@@ -118,19 +83,19 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                                 Sign in to your account
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="/inicio">
+                            <form className="space-y-4 md:space-y-6" onSubmit={this.handleSubmit}>
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                                    <InputField type="email" name="email" id="email" placeholder="name@company.com"></InputField>
+                                    <InputField onChange={this.handleInputChange} type="email" name="email" id="email" placeholder="name@company.com"></InputField>
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                                    <InputField type="password" name="password" id="passdword" placeholder="••••••••"></InputField>
+                                    <InputField onChange={this.handleInputChange} type="password" name="password" id="passdword" placeholder="••••••••"></InputField>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-start">
                                         <div className="flex items-center h-5">
-                                            <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50" required></input>
+                                            <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50"></input>
                                         </div>
                                         <div className="ml-3 text-sm">
                                             <label htmlFor="remember" className="text-gray-500">Remember me</label>
@@ -138,7 +103,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
                                     </div>
                                     <a href="#" className="text-sm font-medium text-primary-600 hover:underline">Forgot password?</a>
                                 </div>
-                                <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                                <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"><Link to="/Inicio">Sign in</Link></button>
                                 <p className="text-sm font-light text-gray-500">
                                     Don't have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline"><Link to="/register">Sign up</Link></a>
                                 </p>
@@ -149,7 +114,80 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
             </section>
         )
     }
-    
+
 }
 
 export default LoginPage
+
+
+/*
+import LandingNavBar from "../components/NavBar/LandingNavBar"
+import CardProducto from "../components/Cards/CardProducto"
+import { Component } from "react"
+import ProductoAPI from "../api/products"
+
+interface Product {
+    id: number;
+    name: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+  }
+  
+  interface ProductosPageProps {
+    productos: Product[];
+  }
+  
+  interface ProductosPageState {
+    productos: Product[];
+  }
+  
+
+
+class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
+
+    constructor(props: ProductosPageProps) {
+        super(props);
+        this.state = {
+            productos: []
+        }
+    }
+
+    componentDidMount() {
+        this.cargarProductos();
+      }
+
+    cargarProductos() {
+        ProductoAPI.findAll()
+            .then((promise) => {
+                const products = promise.data;
+                this.setState({ productos: products });
+                console.log(products);
+            })
+            .catch((error) => {
+                // Handle errors here
+                console.error("Error loading products:", error);
+            });
+        
+    }
+
+    render() {
+        return (
+            <>
+            <div className="mt-20"></div>
+            <div className="flex flex-wrap gap-20 justify-center">
+                {
+                    this.state.productos.map((producto) => (
+                        <CardProducto nombre={producto.name} image={producto.image}></CardProducto>
+                    ))
+                }
+            </div>
+            </>
+        )
+    }
+
+    
+}
+
+export default ProductosPage
+*/
