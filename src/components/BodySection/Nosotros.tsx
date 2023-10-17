@@ -1,4 +1,6 @@
 import { Component } from 'react'
+/*import React from 'react';
+
 class submenu {
   name: string;
   href: string;
@@ -13,13 +15,23 @@ class submenu {
   }
 }
 
+interface menuProps {
+  menu: submenu[];
+}
 
 
 const submenus: submenu[] = [
   new submenu('Participantes', '#'),
   new submenu('Mision Vision', '#'),
   new submenu('Políticas', '#'),
-  new submenu('Contactanos', '#')]
+  new submenu('Contactanos', '#')]*/
+
+const menus = [
+  { name: 'Participantes', href: '#' },
+{ name: 'Mision Vision', href: '#' },
+{ name: 'Políticas', href: '#' },
+{ name: 'Contactanos', href: '#' },
+]
 
 const stats = [
   { name: 'Empleados Activos', value: '6' },
@@ -71,7 +83,11 @@ class Nosotros extends Component {
             </div>
             <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-                <script src="script.tsx"></script>
+              {menus.map((menu) => (
+                              <a key={menu.name} href={menu.href}>
+                                {menu.name} <span aria-hidden="true">&rarr;</span>
+                              </a>
+                            ))}
               </div>
               <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
                 {stats.map((stat) => (
@@ -127,11 +143,11 @@ class Nosotros extends Component {
             </div>
             <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-                {/*{submenus.map((submenu,name,) => (
-                              <a key={link.name} href={link.href}>
-                                {link.name} <span aria-hidden="true">&rarr;</span>
+                {menus.map((menu) => (
+                              <a key={menu.name} href={menu.href}>
+                                {menu.name} <span aria-hidden="true">&rarr;</span>
                               </a>
-                            ))}*/}
+                            ))}
 
               </div>
             </div>
