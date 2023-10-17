@@ -173,9 +173,14 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
       .then((results) => {
         console.log('Order items created successfully:', results);
       })
+      .then(() => {
+        window.location.replace('/pedidos');
+      })
       .catch((error) => {
         console.error('Error creating order detail or items:', error);
       });
+      
+
   }
 
   render() {

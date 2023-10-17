@@ -3,10 +3,10 @@ import Base from './base'
 class UserAPI {
     private static endpoint: string = '/user';
 
-    static async create(orderDetailObj: any) {
+    static async create(userObj: any) {
         try {
-            // Ensure that orderDetailObj matches the expected structure of your API and database
-            const response = await Base.post(this.endpoint, orderDetailObj);
+            // Ensure that userObj matches the expected structure of your API and database
+            const response = await Base.post(this.endpoint, userObj);
             console.log('POST Response:', response); // Log the response for debugging
             return response.data;
         } catch (error) {
@@ -16,7 +16,7 @@ class UserAPI {
     }
 
     static async findAll() {
-        await Base.get(this.endpoint);
+        return await Base.get(this.endpoint);
     }
 
     static async findOne(id: string) {

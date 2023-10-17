@@ -9,11 +9,12 @@ interface LandingNavBarProps extends RouteComponentProps {}
 
 class LandingNavBar extends Component <LandingNavBarProps> {
 
+    private userItem = localStorage.getItem("user");
+    private user = this.userItem !== null ? JSON.parse(this.userItem) : null;
+
     constructor(props: LandingNavBarProps) {
         super(props);
     }
-
-    usuarioLogueado = true;
 
     render() {
         return (
@@ -25,7 +26,7 @@ class LandingNavBar extends Component <LandingNavBarProps> {
                         </a>
                         <div className="flex md:order-2">
                             {
-                                this.usuarioLogueado ? (
+                                this.user !== null ? (
                                     <div>
                                         <a href='#' className='pr-5'><ShoppingCartOutlinedIcon /></a>
                                         <a href='#'><AccountCircleOutlinedIcon /></a>

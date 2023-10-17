@@ -3,10 +3,10 @@ import Base from './base'
 class OrderItemsAPI {
     static endpoint = '/order_items';
 
-    static async create(orderDetailObj: any) {
+    static async create(orderItemsObj: any) {
         try {
-            // Ensure that orderDetailObj matches the expected structure of your API and database
-            const response = await Base.post(this.endpoint, orderDetailObj);
+            // Ensure that orderItemsObj matches the expected structure of your API and database
+            const response = await Base.post(this.endpoint, orderItemsObj);
             console.log('POST Response:', response); // Log the response for debugging
             return response.data;
         } catch (error) {

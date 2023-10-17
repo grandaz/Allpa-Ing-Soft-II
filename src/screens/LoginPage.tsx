@@ -2,18 +2,72 @@ import InputField from "../components/Inputs/InputField"
 import Logo from '../assets/icon1.png'
 import { Link } from "react-router-dom"
 import { Component } from "react"
-import ProductoAPI from './../api/products'
 import UserAPI from './../api/user'
+import User from "../classes/User"
 
-interface LoginPageProps{
+interface LoginPageProps { }
 
+interface LoginPageState {
+    users: User[];
+    email: string;
+    password: string;
 }
 
-class LoginPage extends Component<LoginPageProps>{
-
+class LoginPage extends Component<LoginPageProps, LoginPageState>{
 
     constructor(props: LoginPageProps) {
         super(props);
+        this.state = {
+            users: [],
+            email: '',
+            password: '',
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.cargarUsuarios();
+    }
+
+    private cargarUsuarios() {
+        UserAPI.findAll()
+            .then((promise) => {
+                const data = promise.data;
+                this.setState({ users: data });
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error("Error cargando usuarios:", error);
+            });
+    }
+
+    private handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        } as unknown as Pick<LoginPageState, keyof LoginPageState>);
+    }
+
+    private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const { email, password, users } = this.state;
+
+        const user = users.find((user) => user.email === email);
+
+        if (user) {
+            if (user.password === password) {
+                console.log('Authentication successful');
+                window.localStorage.setItem('user', JSON.stringify(user));
+                window.location.replace('/inicio');
+            } else {
+                console.log('Incorrect password');
+            }
+        } else {
+            console.log('User not found');
+        }
     }
 
     render() {
@@ -32,16 +86,16 @@ class LoginPage extends Component<LoginPageProps>{
                             <form className="space-y-4 md:space-y-6" action="/inicio">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                                    <InputField type="email" name="email" id="email" placeholder="name@company.com"></InputField>
+                                    <InputField onChange={this.handleInputChange} type="email" name="email" id="email" placeholder="name@company.com"></InputField>
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                                    <InputField type="password" name="password" id="passdword" placeholder="••••••••"></InputField>
+                                    <InputField onChange={this.handleInputChange} type="password" name="password" id="passdword" placeholder="••••••••"></InputField>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-start">
                                         <div className="flex items-center h-5">
-                                            <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50" required></input>
+                                            <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50"></input>
                                         </div>
                                         <div className="ml-3 text-sm">
                                             <label htmlFor="remember" className="text-gray-500">Remember me</label>
@@ -60,7 +114,7 @@ class LoginPage extends Component<LoginPageProps>{
             </section>
         )
     }
-    
+
 }
 
 export default LoginPage

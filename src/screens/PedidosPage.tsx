@@ -2,6 +2,7 @@ import OrderDetails from "../classes/OrderDetails"
 import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
 import OrderDetailsAPI from "../api/order_details"
+import DefaultProfile from '../assets/default_profile.jpg'
 
 interface PedidosPageState {
     pedidos: OrderDetails[]
@@ -43,7 +44,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
                     {this.state.pedidos.map(pedido => (
                             <CardPedido 
                                 key={pedido.ordetail_id}
-                                profileImage={pedido.user?.profileImage ?? 'No se encontró imagen'} 
+                                profileImage={pedido.user?.profileImage ?? DefaultProfile} 
                                 nombre={pedido.user?.first_name + ' ' + pedido.user?.last_name}
                                 fechaCrea={pedido.createdAt.substring(0,10)}
                                 titulo={pedido.titulo}

@@ -15,6 +15,9 @@ interface CardProductoProps {
 
 class CardProducto extends Component<CardProductoProps> {
 
+    private userItem = localStorage.getItem("user");
+    private user = this.userItem !== null ? JSON.parse(this.userItem) : null;
+
     constructor(props: CardProductoProps) {
         super(props);
     }
@@ -38,7 +41,7 @@ class CardProducto extends Component<CardProductoProps> {
                             +
                         </Typography>
                     </div>
-    
+
                     {/*
                     <Typography
                         variant="small"
@@ -51,13 +54,13 @@ class CardProducto extends Component<CardProductoProps> {
                 */}
                 </CardBody>
                 <CardFooter className="pt-0">
-                    <a href="/crearPedido"><GreenButton type="button" label="Añadir"></GreenButton></a>
+                    <a href={this.user !== null ? "/crearPedido" : "/login"}><GreenButton type="button" label="Añadir"></GreenButton></a>
                 </CardFooter>
             </Card>
         )
     }
 
-    
+
 }
 
 export default CardProducto

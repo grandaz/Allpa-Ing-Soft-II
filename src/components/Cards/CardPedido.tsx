@@ -8,6 +8,7 @@ import {
 import GreenButton from "../Inputs/GreenButton";
 import { Component } from "react"
 
+
 interface CardPedidoProps {
   profileImage: string
   nombre: string
