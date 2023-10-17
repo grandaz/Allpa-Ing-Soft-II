@@ -1,6 +1,5 @@
 import Logo from '../assets/icon1.png'
 import { Component } from "react"
-import User from '../classes/User';
 import UserAPI from '../api/user';
 
 interface SignInPageProps { }

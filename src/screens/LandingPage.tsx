@@ -1,4 +1,3 @@
-import User from "../classes/User"
 import Footer from "../components/Footer/Footer"
 import HeaderAboutUs from "../components/HeaderSections/HeaderAboutUs"
 import HeroSection from "../components/HeroSection/HeroSection"
