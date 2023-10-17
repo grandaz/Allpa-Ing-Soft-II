@@ -30,5 +30,4 @@ class InicioPage extends Component<InicioPageProps> {
 
 }
 
-
 export default InicioPage

@@ -36,7 +36,7 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
 
     private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-
+        let user: string;
         const usuario = {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -47,9 +47,13 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
         UserAPI.create(usuario)
             .then((data) => {
                 console.log('User created successfully:', data);
-
-                window.localStorage.setItem('user', JSON.stringify(usuario)); 
-
+                user = JSON.stringify(data);
+                console.log(user);
+            })
+            .then(() =>{
+                window.localStorage.setItem('user', user); 
+            })
+            .then(() => {
                 window.location.replace('/inicio');
             })
             .catch((error) => {

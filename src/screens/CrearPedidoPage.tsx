@@ -31,6 +31,10 @@ interface CrearPedidoPageState {
 }
 
 class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageState> {
+
+  private userItem = localStorage.getItem("user");
+  private user = this.userItem !== null ? JSON.parse(this.userItem) : null;
+
   constructor(props: CrearPedidoPageProps) {
     super(props);
 
@@ -140,7 +144,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
     event.preventDefault();
 
     const orderDetailObj = {
-      user_id: 1,
+      user_id: this.user.id,
       payment_id: 1,
       titulo: this.state.titulo,
       descripcion: this.state.descripcion,

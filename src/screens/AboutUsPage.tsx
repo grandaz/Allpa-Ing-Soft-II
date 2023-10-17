@@ -1,7 +1,6 @@
 import Footer from "../components/Footer/Footer"
 import Nosotros from "../components/BodySection/Nosotros"
 import Logos from "../components/Logos/Logos"
-import LandingNavBar from "../components/NavBar/LandingNavBar"
 import Stats from "../components/Stats/Stats"
 import { Component } from "react"
 
