@@ -3,6 +3,8 @@ import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
 import OrderDetailsAPI from "../api/order_details"
 import DefaultProfile from '../assets/default_profile.jpg'
+import GreenButton from "../components/Inputs/GreenButton"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 interface PedidosPageState {
     pedidos: OrderDetails[]
@@ -39,6 +41,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         return (
             <>
                 <div className="mt-20"></div>
+                <div className="flex gap-4 mt-4"> {/* Utiliza la clase "flex" para colocar los botones en la misma línea */}
+                    <Link to="/buscarProducto">
+                    <GreenButton label="Buscar por Producto"/>
+                    </Link>
+                    <GreenButton label="Buscar por Vendedor"></GreenButton>
+                </div>
+                
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos</h2>
                 <div className="flex flex-wrap gap-20 justify-center mx-auto">
                     {this.state.pedidos.map(pedido => (
