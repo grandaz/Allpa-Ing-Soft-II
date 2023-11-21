@@ -10,6 +10,7 @@ import MisPedidosPage from './screens/MisPedidosPage'
 import SupportPage from './screens/SupportPage'
 import CrearPedidoPage from './screens/CrearPedidoPage'
 import LandingNavBar from './components/NavBar/LandingNavBar'
+import EditProfilePage from './screens/EditProfilePage'
 import { Component } from 'react'
 import QuickViewPedido from './components/DetallePedido/DetallePedido'
 
@@ -34,6 +35,7 @@ export default class App extends Component {
           <Route path='/soporte' component={SupportPage} />
           <Route path='/crearPedido' component={CrearPedidoPage} />
           <Route path='/detallePedido' component={QuickViewPedido} />
+          <Route path='/edit' component={EditProfilePage} />
         </Switch>
       </Router>
     )
