@@ -1,13 +1,24 @@
 import InputField from '../components/Inputs/InputField';
 import GreenButton from '../components/Inputs/GreenButton';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import UserAPI from './../api/user'
+import User from "../classes/User"
 
 interface EditProfilePageProps {}
 
-class EditProfilePage extends Component<EditProfilePageProps> {
-  constructor(props: EditProfilePageProps) {
-    super(props);
-  }
+interface EditProfilePageState {
+    loggedInUser: User | null;
+    users: User[];
+}
+
+  class EditProfilePage extends Component<EditProfilePageProps, EditProfilePageState> {
+    constructor(props: EditProfilePageProps) {
+        super(props);
+        this.state = {
+          loggedInUser: null,
+          users: [],
+        };
+    }
 
   handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -50,6 +61,30 @@ class EditProfilePage extends Component<EditProfilePageProps> {
     }*/
   };
 
+  private cargarUsuario() {
+    UserAPI.findAll()
+        .then((promise) => {
+            const data = promise.data;
+            this.setState({ users: data });
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error cargando usuarios:", error);
+        });
+}
+
+  componentDidMount() {
+    this.cargarUsuario();
+    // Recuperar el usuario desde el almacenamiento local
+    const storedUser = window.localStorage.getItem('user');
+    if (storedUser) {
+        const user = JSON.parse(storedUser);
+        // Hacer algo con la información del usuario, por ejemplo, mostrarla en el estado local del componente
+        this.setState({ loggedInUser: user });
+    }
+}
+
+  
 
   render() {
     return (
