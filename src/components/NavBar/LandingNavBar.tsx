@@ -29,7 +29,7 @@ class LandingNavBar extends Component <LandingNavBarProps> {
                                 this.user !== null ? (
                                     <div>
                                         <a href='#' className='pr-5'><ShoppingCartOutlinedIcon /></a>
-                                        <a href='#'><AccountCircleOutlinedIcon /></a>
+                                        <a href='/edit'><AccountCircleOutlinedIcon /></a>
                                     </div>
                                 ) : (
                                     <a href='/login'><GreenButton type='button' label='Iniciar sesión'></GreenButton></a>
