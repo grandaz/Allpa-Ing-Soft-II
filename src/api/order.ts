@@ -1,8 +1,8 @@
 import Base from './base'
 
-class OrderDetailsAPI {
+class OrderAPI {
 
-    private static endpoint: string = '/order_detail';
+    private static endpoint: string = '/order';
     /*
     static async create(request: string) {
         return await Base.post(this.endpoint, request);
@@ -43,4 +43,4 @@ class OrderDetailsAPI {
 
 }
 
-export default OrderDetailsAPI;
+export default OrderAPI;

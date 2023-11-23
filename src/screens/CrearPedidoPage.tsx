@@ -4,10 +4,10 @@ import GreenButton from '../components/Inputs/GreenButton';
 import { Component } from 'react';
 import Product from '../classes/Product';
 import Measure from '../classes/Measure';
-import ProductoAPI from '../api/products';
+import ProductoAPI from '../api/product';
 import MeasureAPI from '../api/measure';
-import OrderDetailsAPI from '../api/order_details';
-import OrderItemsAPI from '../api/order_items';
+import OrderAPI from '../api/order';
+import OrderItem from '../api/order_item';
 
 interface CrearPedidoPageProps {}
 
@@ -143,7 +143,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
   private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const orderDetailObj = {
+    const orderObj = {
       user_id: this.user.id,
       payment_id: 1,
       titulo: this.state.titulo,
@@ -154,7 +154,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
 
     let orderId: number;
 
-    OrderDetailsAPI.create(orderDetailObj)
+    OrderAPI.create(orderObj)
       .then((data) => {
         console.log('Order detail created successfully:', data);
         orderId = data.ordetail_id;
@@ -169,7 +169,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
             measure_id: +values.measure_id,
             price: +values.price,
           };
-          return OrderItemsAPI.create(orderItemsObj);
+          return OrderItem.create(orderItemsObj);
         });
 
         return Promise.all(promises);

@@ -1,7 +1,7 @@
 import OrderDetails from "../classes/OrderDetails"
 import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
-import OrderDetailsAPI from "../api/order_details"
+import OrderAPI from "../api/order"
 import DefaultProfile from '../assets/default_profile.jpg'
 import GreenButton from "../components/Inputs/GreenButton"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -26,7 +26,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
     }
 
     private cargarPedidos() {
-        OrderDetailsAPI.findAll()
+        OrderAPI.findAll()
             .then((promise) => {
                 const data = promise.data;
                 this.setState({ pedidos: data });

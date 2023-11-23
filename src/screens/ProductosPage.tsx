@@ -1,6 +1,6 @@
 import CardProducto from "../components/Cards/CardProducto"
 import { Component } from "react"
-import ProductoAPI from "../api/products"
+import ProductoAPI from "../api/product"
 import Product from '../classes/Product'
   
   interface ProductosPageProps {} // Para futuros cambios

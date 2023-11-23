@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import OrderDetails from "../classes/OrderDetails";
 import CardPedido from "../components/Cards/CardPedido";
-import OrderDetailsAPI from "../api/order_details";
+import OrderAPI from "../api/order";
 import DefaultProfile from '../assets/default_profile.jpg';
-import ProductoAPI from "../api/products";
+import ProductoAPI from "../api/product";
 import Product from "../classes/Product";
 
 interface PedidosPageState {
@@ -52,7 +52,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
 
 
   private cargarPedidos() {
-    OrderDetailsAPI.findAll()
+    OrderAPI.findAll()
       .then((promise) => {
         const data = promise.data;
         this.setState({ pedidos: data });

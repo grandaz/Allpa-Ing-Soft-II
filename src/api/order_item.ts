@@ -1,7 +1,7 @@
 import Base from './base'
 
-class OrderItemsAPI {
-    static endpoint = '/order_items';
+class OrderItemAPI {
+    static endpoint = '/orderItem';
 
     static async create(orderItemsObj: any) {
         try {
@@ -34,4 +34,4 @@ class OrderItemsAPI {
     }
 }
 
-export default OrderItemsAPI;
+export default OrderItemAPI;
