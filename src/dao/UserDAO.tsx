@@ -27,15 +27,15 @@ class UserDAO {
             const list = response.data.map((item: any) => {
                 const userTO = new UserTO();
 
-                userTO.id = item.ID_USER
-                userTO.firstName = item.FIRST_NAME
-                userTO.lastName = item.LAST_NAME
-                userTO.idDocType = item.FK_ID_DOC_TYPE
-                userTO.noDoc = item.NO_DOC
-                userTO.telephone = item.TELEPHONE
-                userTO.email = item.EMAIL
-                userTO.password = item.PASSWORD
-                userTO.profileImage = item.PROFILE_IMAGE
+                userTO.idUser = item.idUser
+                userTO.firstName = item.firstName
+                userTO.lastName = item.lastName
+                userTO.idDocType = item.idDocType
+                userTO.noDoc = item.noDoc
+                userTO.telephone = item.telephone
+                userTO.email = item.email
+                userTO.password = item.password
+                userTO.profileImage = item.profileImage
                 userTO.createdAt = item.createdAt
                 userTO.updatedAt = item.updatedAt
 
@@ -57,15 +57,15 @@ class UserDAO {
 
             const userTO = new UserTO()
 
-            userTO.id = response.data.ID_USER
-            userTO.firstName = response.data.FIRST_NAME
-            userTO.lastName = response.data.LAST_NAME
-            userTO.idDocType = response.data.FK_ID_DOC_TYPE
-            userTO.noDoc = response.data.NO_DOC
-            userTO.telephone = response.data.TELEPHONE
-            userTO.email = response.data.EMAIL
-            userTO.password = response.data.PASSWORD
-            userTO.profileImage = response.data.PROFILE_IMAGE
+            userTO.idUser = response.data.idUser
+            userTO.firstName = response.data.firstName
+            userTO.lastName = response.data.lastName
+            userTO.idDocType = response.data.idDocType
+            userTO.noDoc = response.data.noDoc
+            userTO.telephone = response.data.telephone
+            userTO.email = response.data.email
+            userTO.password = response.data.password
+            userTO.profileImage = response.data.profileImage
             userTO.createdAt = response.data.createdAt
             userTO.updatedAt = response.data.updatedAt
 

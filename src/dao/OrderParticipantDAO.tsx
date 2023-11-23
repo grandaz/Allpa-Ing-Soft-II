@@ -27,11 +27,11 @@ class OrderParticipantDAO {
             const list = response.data.map((item: any) => {
                 const orderParticipantTO = new OrderParticipantTO();
 
-                orderParticipantTO.id = item.ID_ORDER_PARTICIPANT
-                orderParticipantTO.idOrder = item.FK_ID_ORDER
-                orderParticipantTO.idUser = item.FK_ID_USER
-                orderParticipantTO.idProduct = item.FK_ID_PRODUCT
-                orderParticipantTO.ammount = item.AMMOUNT
+                orderParticipantTO.idOrderParticipant = item.idOrderParticipant
+                orderParticipantTO.idOrder = item.idOrder
+                orderParticipantTO.idUser = item.idUser
+                orderParticipantTO.idProduct = item.idProduct
+                orderParticipantTO.ammount = item.ammount
                 orderParticipantTO.createdAt = item.createdAt
                 orderParticipantTO.updatedAt = item.updatedAt
 
@@ -53,11 +53,11 @@ class OrderParticipantDAO {
 
             const orderParticipantTO = new OrderParticipantTO()
 
-            orderParticipantTO.id = response.data.ID_ORDER_PARTICIPANT
-            orderParticipantTO.idOrder = response.data.FK_ID_ORDER
-            orderParticipantTO.idUser = response.data.FK_ID_USER
-            orderParticipantTO.idProduct = response.data.FK_ID_PRODUCT
-            orderParticipantTO.ammount = response.data.AMMOUNT
+            orderParticipantTO.idOrderParticipant = response.data.idOrderParticipant
+            orderParticipantTO.idOrder = response.data.idOrder
+            orderParticipantTO.idUser = response.data.idUser
+            orderParticipantTO.idProduct = response.data.idProduct
+            orderParticipantTO.ammount = response.data.ammount
             orderParticipantTO.createdAt = response.data.createdAt
             orderParticipantTO.updatedAt = response.data.updatedAt
 

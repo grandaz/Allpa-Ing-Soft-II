@@ -15,7 +15,7 @@ class OrderItemDAO {
             //console.log('POST Response:', response);
             return response.data;
         } catch (error) {
-            console.error('Error creando usuario:', error);
+            console.error('Error creando ORDER_ITEM:', error);
             throw error;
         }
     }
@@ -27,11 +27,11 @@ class OrderItemDAO {
             const list = response.data.map((item: any) => {
                 const orderItemTO = new OrderItemTO();
 
-                orderItemTO.id = item.ID_ORDER_ITEM
-                orderItemTO.idOrder = item.FK_ID_ORDER
-                orderItemTO.idProduct = item.FK_ID_PRODUCT
-                orderItemTO.ammount = item.AMMOUNT
-                orderItemTO.idMeasure = item.FK_ID_MEASURE
+                orderItemTO.idOrderItem = item.idOrderItem
+                orderItemTO.idOrder = item.idOrder
+                orderItemTO.idProduct = item.idProduct
+                orderItemTO.ammount = item.ammount
+                orderItemTO.idMeasure = item.idMeasure
                 orderItemTO.createdAt = item.createdAt
                 orderItemTO.updatedAt = item.updatedAt
 
@@ -40,7 +40,7 @@ class OrderItemDAO {
 
             return list;
         } catch (error) {
-            console.error('Error listando usuarios:', error);
+            console.error('Error listando ORDER_ITEMs:', error);
             throw error;
         }
         
@@ -53,17 +53,17 @@ class OrderItemDAO {
 
             const orderItemTO = new OrderItemTO()
 
-            orderItemTO.id = response.data.ID_ORDER_ITEM
-            orderItemTO.idOrder = response.data.FK_ID_ORDER
-            orderItemTO.idProduct = response.data.FK_ID_PRODUCT
-            orderItemTO.ammount = response.data.AMMOUNT
-            orderItemTO.idMeasure = response.data.FK_ID_MEASURE
+            orderItemTO.idOrderItem = response.data.idOrderItem
+            orderItemTO.idOrder = response.data.idOrder
+            orderItemTO.idProduct = response.data.idProduct
+            orderItemTO.ammount = response.data.ammount
+            orderItemTO.idMeasure = response.data.idMeasure
             orderItemTO.createdAt = response.data.createdAt
             orderItemTO.updatedAt = response.data.updatedAt
 
             return orderItemTO;
         } catch (error) {
-            console.error('Error buscando al usuario:', error);
+            console.error('Error buscando al ORDER_ITEM:', error);
             throw error;
         }
     }
@@ -73,7 +73,7 @@ class OrderItemDAO {
             const response = await API.put(this.endpoint, obj);
             return response;
         } catch (error) {
-            console.error('Error actualizando al usuario:', error);
+            console.error('Error actualizando al ORDER_ITEM:', error);
             throw error;
         }
     } 
@@ -84,7 +84,7 @@ class OrderItemDAO {
             const response = await API.remove(newEndpoint);
             return response;
         } catch (error) {
-            console.error('Error eliminando al usuario:', error);
+            console.error('Error eliminando al ORDER_ITEM:', error);
             throw error;
         }
     }

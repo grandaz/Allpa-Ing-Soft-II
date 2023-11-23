@@ -1,6 +1,8 @@
 import Logo from '../assets/icon1.png'
 import { Component } from "react"
-import UserAPI from '../api/user';
+
+import UserManager from '../manager/UserManager';
+import UserTO from '../to/UserTO';
 
 interface SignInPageProps { }
 
@@ -37,14 +39,19 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
     private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         let user: string;
-        const usuario = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            email: this.state.email,
-            password: this.state.password,
-        }
-        console.log(JSON.stringify(usuario));
-        UserAPI.create(usuario)
+
+        const userTO = new UserTO()
+
+        userTO.firstName = this.state.first_name
+        userTO.lastName = this.state.last_name
+        userTO.email = this.state.email
+        userTO.password = this.state.password
+
+        console.log(JSON.stringify(userTO));
+
+        const userManager = new UserManager()
+
+        userManager.create(userTO)
             .then((data) => {
                 console.log('User created successfully:', data);
                 user = JSON.stringify(data);

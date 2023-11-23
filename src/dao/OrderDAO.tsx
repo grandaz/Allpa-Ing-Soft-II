@@ -13,6 +13,8 @@ class OrderDAO {
         try {
             const response = await API.post(this.endpoint, obj);
             //console.log('POST Response:', response);
+            //const data = response.data
+            //const id = data.idOrder
             return response.data;
         } catch (error) {
             console.error('Error creando ORDER:', error);
@@ -27,13 +29,13 @@ class OrderDAO {
             const list = response.data.map((item: any) => {
                 const orderTO = new OrderTO();
 
-                orderTO.id = item.ID_ORDER
-                orderTO.idUser = item.FK_ID_USER
-                orderTO.title = item.TITLE
-                orderTO.description = item.DESCRIPTION
-                orderTO.deliveryDate = item.DELIVERY_DATE
-                orderTO.address = item.ADDRESS
-                orderTO.fgState = item.FG_STATE
+                orderTO.idOrder = item.idOrder
+                orderTO.idUser = item.idUser
+                orderTO.title = item.title
+                orderTO.description = item.description
+                orderTO.deliveryDate = item.deliveryDate
+                orderTO.address = item.address
+                orderTO.fgState = item.fgState
                 orderTO.createdAt = item.createdAt
                 orderTO.updatedAt = item.updatedAt
 
@@ -55,13 +57,13 @@ class OrderDAO {
 
             const orderTO = new OrderTO()
 
-            orderTO.id = response.data.ID_ORDER
-            orderTO.idUser = response.data.FK_ID_USER
-            orderTO.title = response.data.TITLE
-            orderTO.description = response.data.DESCRIPTION
-            orderTO.deliveryDate = response.data.DELIVERY_DATE
-            orderTO.address = response.data.ADDRESS
-            orderTO.fgState = response.data.FG_STATE
+            orderTO.idOrder = response.data.idOrder
+            orderTO.idUser = response.data.idUser
+            orderTO.title = response.data.title
+            orderTO.description = response.data.description
+            orderTO.deliveryDate = response.data.deliveryDate
+            orderTO.address = response.data.address
+            orderTO.fgState = response.data.fgState
             orderTO.createdAt = response.data.createdAt
             orderTO.updatedAt = response.data.updatedAt
 

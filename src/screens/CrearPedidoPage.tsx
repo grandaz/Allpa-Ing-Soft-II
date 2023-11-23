@@ -2,12 +2,15 @@ import React from 'react'; // Import React
 import InputField from '../components/Inputs/InputField';
 import GreenButton from '../components/Inputs/GreenButton';
 import { Component } from 'react';
-import Product from '../classes/Product';
-import Measure from '../classes/Measure';
-import ProductoAPI from '../api/product';
-import MeasureAPI from '../api/measure';
-import OrderAPI from '../api/order';
-import OrderItem from '../api/order_item';
+
+import ProductTO from '../to/ProductTO';
+import MeasureTO from '../to/MeasureTO';
+import OrderTO from '../to/OrderTO';
+import OrderItemTO from '../to/OrderItemTO';
+import ProductManager from '../manager/ProductManager';
+import MeasureManager from '../manager/MeasureManager';
+import OrderItemManager from '../manager/OrderItemManager';
+import OrderManager from '../manager/OrderManager';
 
 interface CrearPedidoPageProps {}
 
@@ -18,8 +21,8 @@ interface CrearPedidoPageState {
     price: number;
     measure_id: number;
   }[];
-  productos: Product[];
-  unidades: Measure[];
+  productos: ProductTO[];
+  unidades: MeasureTO[];
   titulo: string;
   fecha_entrega: string;
   direccion: string;
@@ -69,11 +72,12 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
   }
 
   private cargarProductos() {
-    ProductoAPI.findAll()
-      .then((promise) => {
-        const data = promise.data;
+
+    const productoManager = new ProductManager()
+
+    productoManager.findAll()
+      .then(data => {
         this.setState({ productos: data });
-        console.log(data);
       })
       .catch((error) => {
         console.error('Error cargando productos:', error);
@@ -81,15 +85,17 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
   }
 
   private cargarUnidades() {
-    MeasureAPI.findAll()
-      .then((promise) => {
-        const data = promise.data;
+
+    const measureManager = new MeasureManager()
+
+    measureManager.findAll()
+      .then(data => {
         this.setState({ unidades: data });
-        console.log(data);
       })
       .catch((error) => {
         console.error('Error cargando unidades de medida:', error);
       });
+
   }
 
   private agregarProducto() {
@@ -143,48 +149,75 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
   private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const orderObj = {
-      user_id: this.user.id,
-      payment_id: 1,
-      titulo: this.state.titulo,
-      descripcion: this.state.descripcion,
-      fecha_entrega: this.state.fecha_entrega,
-      direccion: this.state.direccion,
-    };
-
+    const orderTO = new OrderTO()
     let orderId: number;
 
-    OrderAPI.create(orderObj)
-      .then((data) => {
-        console.log('Order detail created successfully:', data);
-        orderId = data.ordetail_id;
+    orderTO.idUser = this.user.idUser
+    orderTO.title = this.state.titulo
+    orderTO.description = this.state.descripcion
+    orderTO.deliveryDate = this.state.fecha_entrega
+    orderTO.address = this.state.direccion
+    orderTO.fgState = '1'
+    console.log(orderTO)
+
+    const orderManager = new OrderManager()
+
+    orderManager.create(orderTO)
+      .then(data => {
+        orderId = data.idOrder;
+        console.log(orderId);
+        console.log(data)
+
+        const promises = this.state.listaProductosForm.map(values => {
+          const orderItemTO = new OrderItemTO()
+
+          orderItemTO.idOrder = orderId
+          orderItemTO.idProduct = +values.product_id
+          orderItemTO.ammount = +values.cuantity
+          orderItemTO.idMeasure = +values.measure_id
+          orderItemTO.price = +values.price
+
+          const orderItemManager = new OrderItemManager()
+          return orderItemManager.create(orderItemTO)
+        });
+        
+        return Promise.all(promises);
+      })
+      .then((results) => {
+        console.log('Order items created successfully:', results);
+      })
+
+    /*
+    orderManager.create(orderTO)
+      .then(data => {
+        orderId = data.id;
         console.log(orderId);
       })
       .then(() => {
-        const promises = this.state.listaProductosForm.map((values) => {
-          const orderItemsObj = {
-            order_id: orderId,
-            product_id: +values.product_id,
-            cuantity: +values.cuantity,
-            measure_id: +values.measure_id,
-            price: +values.price,
-          };
-          return OrderItem.create(orderItemsObj);
-        });
+        const promises = this.state.listaProductosForm.map(values => {
+          const orderItemTO = new OrderItemTO()
 
+          orderItemTO.id = orderId
+          orderItemTO.idProduct = +values.product_id
+          orderItemTO.ammount = +values.cuantity
+          orderItemTO.idMeasure = +values.measure_id
+          orderItemTO.price = +values.price
+
+          const orderItemManager = new OrderItemManager()
+          return orderItemManager.create(orderItemTO)
+        })
         return Promise.all(promises);
       })
       .then((results) => {
         console.log('Order items created successfully:', results);
       })
       .then(() => {
-        window.location.replace('/pedidos');
+        //window.location.replace('/pedidos');
       })
       .catch((error) => {
         console.error('Error creating order detail or items:', error);
       });
-      
-
+      */
   }
 
   render() {
@@ -224,7 +257,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600"
                 >
                   {this.state.productos.map((element) => (
-                    <option key={element.product_id} value={element.product_id}>
+                    <option key={element.idProduct} value={element.idProduct}>
                       {element.name}
                     </option>
                   ))}
@@ -253,7 +286,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600"
                 >
                   {this.state.unidades.map((element) => (
-                    <option key={element.measure_id} value={element.measure_id}>
+                    <option key={element.idMeasure} value={element.idMeasure}>
                       {element.name}
                     </option>
                   ))}

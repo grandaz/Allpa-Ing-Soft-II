@@ -27,12 +27,12 @@ class SupportDAO {
             const list = response.data.map((item: any) => {
                 const supportTO = new SupportTO();
 
-                supportTO.id = item.ID_SUPPORT
-                supportTO.firstName = item.FIRST_NAME
-                supportTO.lastName = item.LAST_NAME
-                supportTO.idProblemType = item.FK_ID_PROBLEM_TYPE
-                supportTO.description = item.DESCRIPTION
-                supportTO.fgPresential = item.FG_PRESENTIAL
+                supportTO.idSupport = item.idSupport
+                supportTO.firstName = item.firstName
+                supportTO.lastName = item.lastName
+                supportTO.idProblemType = item.idProblemType
+                supportTO.description = item.description
+                supportTO.fgPresential = item.fgPresential
                 supportTO.createdAt = item.createdAt
                 supportTO.updatedAt = item.updatedAt
 
@@ -54,12 +54,12 @@ class SupportDAO {
 
             const supportTO = new SupportTO()
 
-            supportTO.id = response.data.ID_SUPPORT
-            supportTO.firstName = response.data.FIRST_NAME
-            supportTO.lastName = response.data.LAST_NAME
-            supportTO.idProblemType = response.data.FK_ID_PROBLEM_TYPE
-            supportTO.description = response.data.DESCRIPTION
-            supportTO.fgPresential = response.data.FG_PRESENTIAL
+            supportTO.idSupport = response.data.idSupport
+            supportTO.firstName = response.data.firstName
+            supportTO.lastName = response.data.lastName
+            supportTO.idProblemType = response.data.idProblemType
+            supportTO.description = response.data.description
+            supportTO.fgPresential = response.data.fgPresential
             supportTO.createdAt = response.data.createdAt
             supportTO.updatedAt = response.data.updatedAt
 

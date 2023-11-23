@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import OrderDetails from "../classes/OrderDetails";
 import CardPedido from "../components/Cards/CardPedido";
-import OrderAPI from "../api/order";
 import DefaultProfile from '../assets/default_profile.jpg';
-import ProductoAPI from "../api/product";
-import Product from "../classes/Product";
+
+import ProductManager from "../manager/ProductManager";
+import ProductTO from "../to/ProductTO";
+import OrderManager from "../manager/OrderManager";
+import OrderTO from "../to/OrderTO";
 
 interface PedidosPageState {
-  pedidos: OrderDetails[];
-  pedidosProducto: OrderDetails[];
-  opcionesDesplegable: Product[]; // Nuevo estado para las opciones del desplegable
+  pedidos: OrderTO[];
+  pedidosProducto: OrderTO[];
+  opcionesDesplegable: ProductTO[]; // Nuevo estado para las opciones del desplegable
 }
 
 interface PedidosPageProps {}
@@ -31,7 +32,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
 
   private buscarProducto(eleccion: string) {
     const pedidosFiltrados = this.state.pedidos.filter(pedido =>
-      pedido.descripcion.toLowerCase().includes(eleccion.toLowerCase())
+      pedido.description?.toLowerCase().includes(eleccion.toLowerCase())
     );
     this.setState({ pedidosProducto: pedidosFiltrados });
   }
@@ -52,9 +53,11 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
 
 
   private cargarPedidos() {
-    OrderAPI.findAll()
-      .then((promise) => {
-        const data = promise.data;
+
+    const orderManager = new OrderManager()
+
+    orderManager.findAll()
+      .then((data) => {
         this.setState({ pedidos: data });
         console.log(data);
       })
@@ -103,13 +106,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         <div className="flex flex-wrap gap-20 justify-center mx-auto">
           {this.state.pedidos.map(pedido => (
             <CardPedido
-              key={pedido.ordetail_id}
+              key={pedido.idOrder}
               profileImage={pedido.user?.profileImage ?? DefaultProfile}
-              nombre={pedido.user?.first_name + ' ' + pedido.user?.last_name}
-              fechaCrea={pedido.createdAt.substring(0,10)}
-              titulo={pedido.titulo}
-              descripcion={pedido.descripcion}
-              fechaEntrega={pedido.fecha_entrega.substring(0,10)}
+              nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
+              fechaCrea={pedido.createdAt?.substring(0,10) ?? ''}
+              titulo={pedido.title ?? ''}
+              descripcion={pedido.description ?? ''}
+              fechaEntrega={pedido.deliveryDate?.substring(0,10) ?? ''}
             ></CardPedido>
           ))}
         </div>

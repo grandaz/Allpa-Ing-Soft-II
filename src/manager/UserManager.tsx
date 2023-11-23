@@ -29,6 +29,8 @@ class UserManager {
         return this.userDAO.remove(id.toString())
     }
 
+    
+
 }
 
 export default UserManager

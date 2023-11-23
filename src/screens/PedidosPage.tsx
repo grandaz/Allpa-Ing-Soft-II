@@ -1,13 +1,14 @@
-import OrderDetails from "../classes/OrderDetails"
 import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
-import OrderAPI from "../api/order"
 import DefaultProfile from '../assets/default_profile.jpg'
 import GreenButton from "../components/Inputs/GreenButton"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import OrderTO from "../to/OrderTO"
+import OrderManager from "../manager/OrderManager"
+
 interface PedidosPageState {
-    pedidos: OrderDetails[]
+    pedidos: OrderTO[]
 }
 
 interface PedidosPageProps {}
@@ -26,9 +27,11 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
     }
 
     private cargarPedidos() {
-        OrderAPI.findAll()
-            .then((promise) => {
-                const data = promise.data;
+
+        const orderManager = new OrderManager()
+
+        orderManager.findAll()
+            .then((data) => {
                 this.setState({ pedidos: data });
                 console.log(data);
             })
@@ -52,13 +55,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
                 <div className="flex flex-wrap gap-20 justify-center mx-auto">
                     {this.state.pedidos.map(pedido => (
                             <CardPedido 
-                                key={pedido.ordetail_id}
+                                key={pedido.idOrder}
                                 profileImage={pedido.user?.profileImage ?? DefaultProfile} 
-                                nombre={pedido.user?.first_name + ' ' + pedido.user?.last_name}
-                                fechaCrea={pedido.createdAt.substring(0,10)}
-                                titulo={pedido.titulo}
-                                descripcion={pedido.descripcion}
-                                fechaEntrega={pedido.fecha_entrega.substring(0,10)}
+                                nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
+                                fechaCrea={pedido.createdAt?.substring(0,10) ?? ''}
+                                titulo={pedido.title ?? ''}
+                                descripcion={pedido.description ?? ''}
+                                fechaEntrega={pedido.deliveryDate?.substring(0,10) ?? ''}
                             ></CardPedido>
                         ))}
                 </div>

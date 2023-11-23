@@ -1,14 +1,15 @@
 import InputField from '../components/Inputs/InputField';
 import GreenButton from '../components/Inputs/GreenButton';
 import React, { Component } from 'react';
-import UserAPI from './../api/user'
-import User from "../classes/User"
+
+import UserManager from '../manager/UserManager';
+import UserTO from '../to/UserTO';
 
 interface EditProfilePageProps {}
 
 interface EditProfilePageState {
-    loggedInUser: User | null;
-    users: User[];
+    loggedInUser: UserTO | null;
+    users: UserTO[];
 }
 
   class EditProfilePage extends Component<EditProfilePageProps, EditProfilePageState> {
@@ -62,9 +63,11 @@ interface EditProfilePageState {
   };
 
   private cargarUsuario() {
-    UserAPI.findAll()
-        .then((promise) => {
-            const data = promise.data;
+
+    const userManager = new UserManager()
+
+    userManager.findAll()
+        .then((data) => {
             this.setState({ users: data });
             console.log(data);
         })

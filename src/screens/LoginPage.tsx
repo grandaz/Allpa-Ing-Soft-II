@@ -2,13 +2,14 @@ import InputField from "../components/Inputs/InputField"
 import Logo from '../assets/icon1.png'
 import { Link } from "react-router-dom"
 import { Component } from "react"
-import UserAPI from './../api/user'
-import User from "../classes/User"
+import UserManager from "../manager/UserManager"
+
+import UserTO from "../to/UserTO"
 
 interface LoginPageProps { }
 
 interface LoginPageState {
-    users: User[];
+    users: UserTO[];
     email: string;
     password: string;
 }
@@ -32,15 +33,18 @@ class LoginPage extends Component<LoginPageProps, LoginPageState>{
     }
 
     private cargarUsuarios() {
-        UserAPI.findAll()
-            .then((promise) => {
-                const data = promise.data;
+
+        const userManager = new UserManager()
+
+        userManager.findAll()
+            .then((data) => {
                 this.setState({ users: data });
                 console.log(data);
             })
             .catch((error) => {
                 console.error("Error cargando usuarios:", error);
             });
+
     }
 
     private handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {

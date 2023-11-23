@@ -1,12 +1,13 @@
 import CardProducto from "../components/Cards/CardProducto"
 import { Component } from "react"
-import ProductoAPI from "../api/product"
-import Product from '../classes/Product'
+
+import ProductTO from "../to/ProductTO"
+import ProductManager from "../manager/ProductManager"
   
   interface ProductosPageProps {} // Para futuros cambios
   
   interface ProductosPageState {
-    productos: Product[];
+    productos: ProductTO[];
   }
 
 class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
@@ -23,9 +24,11 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
     }
 
     private cargarProductos() {
-        ProductoAPI.findAll()
-            .then((promise) => {
-                const data = promise.data;
+
+        const productManager = new ProductManager()
+
+        productManager.findAll()
+            .then((data) => {
                 this.setState({ productos: data });
                 console.log(data);
             })
@@ -41,7 +44,7 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
             <div className="flex flex-wrap gap-20 justify-center">
                 {
                     this.state.productos.map((producto) => (
-                        <CardProducto key={producto.product_id} nombre={producto.name} image={producto.image}></CardProducto>
+                        <CardProducto key={producto.idProduct} nombre={producto.name ?? ''} image={producto.image ?? ''}></CardProducto>
                     ))
                 }
             </div>

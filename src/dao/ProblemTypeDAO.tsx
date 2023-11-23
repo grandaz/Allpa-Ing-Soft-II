@@ -27,8 +27,8 @@ class ProblemTypeDAO {
             const list = response.data.map((item: any) => {
                 const problemTypeTO = new ProblemTypeTO();
 
-                problemTypeTO.id = item.ID_PROBLEM_TYPE
-                problemTypeTO.name = item.NAME
+                problemTypeTO.idProblemType = item.idProblemType
+                problemTypeTO.name = item.name
                 problemTypeTO.createdAt = item.createdAt
                 problemTypeTO.updatedAt = item.updatedAt
 
@@ -50,8 +50,8 @@ class ProblemTypeDAO {
 
             const problemTypeTO = new ProblemTypeTO()
 
-            problemTypeTO.id = response.data.ID_PROBLEM_TYPE
-            problemTypeTO.name = response.data.NAME
+            problemTypeTO.idProblemType = response.data.idProblemType
+            problemTypeTO.name = response.data.name
             problemTypeTO.createdAt = response.data.createdAt
             problemTypeTO.updatedAt = response.data.updatedAt
 
