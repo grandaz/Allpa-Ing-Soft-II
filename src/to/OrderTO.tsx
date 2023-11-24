@@ -1,4 +1,7 @@
 import UserTO from "./UserTO";
+import OrderItemTO from "./OrderItemTO";
+import OrderParticipantTO from "./OrderParticipantTO";
+import ParticipationTO from "./ParticipationTO";
 
 export default class OrderTO {
     idOrder?: number;
@@ -12,6 +15,9 @@ export default class OrderTO {
     createdAt?: string;
     updatedAt?: string;
     user?: UserTO;
+    orderItems?: OrderItemTO[];
+    orderParticipants?: OrderParticipantTO[];
+    participations?: ParticipationTO[];
 
     constructor(
         idOrder?: number,

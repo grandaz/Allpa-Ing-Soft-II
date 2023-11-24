@@ -1,28 +1,44 @@
-import React, { useState } from 'react';
+'use client';
 
-// Componente de desplegable
-interface DropdownComponentProps {
-  options: string[];
-  onChange: (selectedOption: string) => void;
+import { useEffect, useState } from 'react'
+import { Dropdown } from 'flowbite-react';
+import ProductTO from '../../to/ProductTO';
+import ProductManager from '../../manager/ProductManager';
+
+interface DropdownComponentProps{
+  enviarIdProduct: (id: number) => void
+
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ options, onChange }) => {
-  const [selectedOption, setSelectedOption] = useState<string>('');
+function DropdownComponent(props: DropdownComponentProps) {
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setSelectedOption(value);
-    onChange(value);
-  };
+  const [nombreProducto, setNombreProducto] = useState<string>('Producto')
+  const [productos, setProductos] = useState<ProductTO[]>([])
+
+  useEffect(() => {
+    const productManager = new ProductManager()
+
+    productManager.findAll()
+      .then(data => {
+        setProductos(data)
+      })
+
+  }, [])
+
+  const handleEnviarIdProduct = (id: any, name: any) => {
+    setNombreProducto(name)
+    props.enviarIdProduct(id)
+  }
 
   return (
-    <select value={selectedOption} onChange={handleSelectChange}>
-      <option value="">Seleccione una opción</option>
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+    <Dropdown label={nombreProducto} dismissOnClick={true}>
+      {
+        productos.map((item, key) => (
+          <Dropdown.Item key={key} onClick={() => handleEnviarIdProduct(item.idProduct, item.name)}>{item.name}</Dropdown.Item>
+        ))
+      }
+    </Dropdown>
   );
-};
+}
+
+export default DropdownComponent

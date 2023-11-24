@@ -3,12 +3,16 @@ import { Component } from "react"
 import DefaultProfile from '../assets/default_profile.jpg'
 import GreenButton from "../components/Inputs/GreenButton"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SearchBar from "../components/Searchs/SearchBar";
+import DropdownComponent from "../components/Searchs/DropdownComponent";
 
 import OrderTO from "../to/OrderTO"
 import OrderManager from "../manager/OrderManager"
 
 interface PedidosPageState {
     pedidos: OrderTO[]
+    filtroIdProducto: number
+    filtroNombre: string
 }
 
 interface PedidosPageProps {}
@@ -18,8 +22,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
     constructor(props: PedidosPageProps) {
         super(props);
         this.state = {
-            pedidos: []
+            pedidos: [],
+            filtroIdProducto: 0,
+            filtroNombre: ''
         }
+
+        this.obtenerIdProduct = this.obtenerIdProduct.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     componentDidMount() {
@@ -30,25 +39,43 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
 
         const orderManager = new OrderManager()
 
-        orderManager.findAll()
+        orderManager.findAllXProductXUser(this.state.filtroIdProducto, this.state.filtroNombre)
             .then((data) => {
-                this.setState({ pedidos: data });
-                console.log(data);
+
+                this.setState({ pedidos: data, filtroNombre: '' });
+                //console.log(data);
             })
             .catch((error) => {
                 console.error("Error cargando pedidos:", error);
             });  
     }
 
+
+    private obtenerIdProduct(idProduct: any) {
+        this.setState({ filtroIdProducto: idProduct }, () => {
+            this.cargarPedidos()
+            console.log(idProduct)
+        })
+        
+    }
+
+    private handleSearch(searchValue: any) {
+        this.setState({ filtroNombre: searchValue }, () => {
+            this.cargarPedidos()
+            console.log(searchValue)
+        })
+    }
+
     render() {
         return (
             <>
                 <div className="mt-20"></div>
-                <div className="flex gap-4 mt-4"> {/* Utiliza la clase "flex" para colocar los botones en la misma línea */}
-                    <Link to="/buscarProducto">
-                    <GreenButton label="Buscar por Producto"/>
-                    </Link>
-                    <GreenButton label="Buscar por Vendedor"></GreenButton>
+
+                <div className="flex gap-4 mx-10">
+                    <DropdownComponent enviarIdProduct={this.obtenerIdProduct}></DropdownComponent>
+                    <div className="w-5/6">
+                        <SearchBar onSearch={this.handleSearch}></SearchBar>
+                    </div>
                 </div>
                 
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos</h2>
