@@ -1,8 +1,8 @@
 import CardPedido from "../components/Cards/CardPedido"
 import { Component } from "react"
 import DefaultProfile from '../assets/default_profile.jpg'
-import GreenButton from "../components/Inputs/GreenButton"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+//import GreenButton from "../components/Inputs/GreenButton"
+//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SearchBar from "../components/Searchs/SearchBar";
 import DropdownComponent from "../components/Searchs/DropdownComponent";
 
