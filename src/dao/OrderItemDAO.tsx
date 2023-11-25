@@ -27,7 +27,7 @@ class OrderItemDAO {
             const list = response.data.map((item: any) => {
                 const orderItemTO = new OrderItemTO();
 
-                orderItemTO.idOrderItem = item.idOrderItem
+                orderItemTO.id = item.id
                 orderItemTO.idOrder = item.idOrder
                 orderItemTO.idProduct = item.idProduct
                 orderItemTO.ammount = item.ammount
@@ -53,7 +53,7 @@ class OrderItemDAO {
 
             const orderItemTO = new OrderItemTO()
 
-            orderItemTO.idOrderItem = response.data.idOrderItem
+            orderItemTO.id = response.data.id
             orderItemTO.idOrder = response.data.idOrder
             orderItemTO.idProduct = response.data.idProduct
             orderItemTO.ammount = response.data.ammount

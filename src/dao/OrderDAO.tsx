@@ -14,7 +14,7 @@ class OrderDAO {
             const response = await API.post(this.endpoint, obj);
             //console.log('POST Response:', response);
             //const data = response.data
-            //const id = data.idOrder
+            //const id = data.id
             return response.data;
         } catch (error) {
             console.error('Error creando ORDER:', error);
@@ -29,7 +29,7 @@ class OrderDAO {
             const list = response.data.map((item: any) => {
                 const orderTO = new OrderTO();
 
-                orderTO.idOrder = item.idOrder
+                orderTO.id = item.id
                 orderTO.idUser = item.idUser
                 orderTO.title = item.title
                 orderTO.description = item.description
@@ -57,7 +57,7 @@ class OrderDAO {
 
             const orderTO = new OrderTO()
 
-            orderTO.idOrder = response.data.idOrder
+            orderTO.id = response.data.id
             orderTO.idUser = response.data.idUser
             orderTO.title = response.data.title
             orderTO.description = response.data.description

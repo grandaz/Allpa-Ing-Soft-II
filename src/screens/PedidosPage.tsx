@@ -82,7 +82,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
                 <div className="flex flex-wrap gap-20 justify-center mx-auto">
                     {this.state.pedidos.map(pedido => (
                             <CardPedido 
-                                key={pedido.idOrder}
+                                key={pedido.id}
                                 profileImage={pedido.user?.profileImage ?? DefaultProfile} 
                                 nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
                                 fechaCrea={pedido.createdAt?.substring(0,10) ?? ''}

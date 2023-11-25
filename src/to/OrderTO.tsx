@@ -4,7 +4,7 @@ import OrderParticipantTO from "./OrderParticipantTO";
 import ParticipationTO from "./ParticipationTO";
 
 export default class OrderTO {
-    idOrder?: number;
+    id?: number;
     idUser?: number;
     idPayment?: number;
     title?: string;
@@ -20,7 +20,7 @@ export default class OrderTO {
     participations?: ParticipationTO[];
 
     constructor(
-        idOrder?: number,
+        id?: number,
         idUser?: number,
         idPayment?: number,
         title?: string,
@@ -32,7 +32,7 @@ export default class OrderTO {
         updatedAt?: string,
         user?: UserTO
     ) {
-        this.idOrder = idOrder;
+        this.id = id;
         this.idUser = idUser;
         this.idPayment = idPayment;
         this.title = title;

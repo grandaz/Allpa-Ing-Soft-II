@@ -1,5 +1,5 @@
 export default class UserTO {
-    idUser?: number;
+    id?: number;
     firstName?: string;
     lastName?: string;
     idDocType?: number;
@@ -12,7 +12,7 @@ export default class UserTO {
     updatedAt?: string;
 
     constructor(
-        idUser?: number,
+        id?: number,
         firstName?: string,
         lastName?: string,
         idDocType?: number,
@@ -24,7 +24,7 @@ export default class UserTO {
         createdAt?: string,
         updatedAt?: string,
     ) {
-        this.idUser = idUser;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.idDocType = idDocType;

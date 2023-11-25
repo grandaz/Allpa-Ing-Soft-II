@@ -27,7 +27,7 @@ class ParticipationDAO {
             const list = response.data.map((item: any) => {
                 const participationTO = new ParticipationTO();
 
-                participationTO.idParticipation = item.idParticipation
+                participationTO.id = item.id
                 participationTO.idUser = item.idUser
                 participationTO.idOrderParticipant = item.idOrderParticipant
                 participationTO.createdAt = item.createdAt
@@ -51,7 +51,7 @@ class ParticipationDAO {
 
             const participationTO = new ParticipationTO()
 
-            participationTO.idParticipation = response.data.idParticipation
+            participationTO.id = response.data.id
             participationTO.idUser = response.data.idUser
             participationTO.idOrderParticipant = response.data.idOrderParticipant
             participationTO.createdAt = response.data.createdAt

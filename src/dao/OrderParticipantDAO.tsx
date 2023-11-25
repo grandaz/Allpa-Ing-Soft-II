@@ -27,7 +27,7 @@ class OrderParticipantDAO {
             const list = response.data.map((item: any) => {
                 const orderParticipantTO = new OrderParticipantTO();
 
-                orderParticipantTO.idOrderParticipant = item.idOrderParticipant
+                orderParticipantTO.id = item.id
                 orderParticipantTO.idOrder = item.idOrder
                 orderParticipantTO.idUser = item.idUser
                 orderParticipantTO.idProduct = item.idProduct
@@ -53,7 +53,7 @@ class OrderParticipantDAO {
 
             const orderParticipantTO = new OrderParticipantTO()
 
-            orderParticipantTO.idOrderParticipant = response.data.idOrderParticipant
+            orderParticipantTO.id = response.data.id
             orderParticipantTO.idOrder = response.data.idOrder
             orderParticipantTO.idUser = response.data.idUser
             orderParticipantTO.idProduct = response.data.idProduct

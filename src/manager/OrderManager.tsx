@@ -52,12 +52,12 @@ class OrderManager {
             const orders = ordersData.map((item: OrderTO) => {
                 return {
                   ...item,
-                  user: users.find((x: UserTO) => x.idUser === item.idUser),
-                  orderItems: orderItems.filter((x: OrderItemTO) => x.idOrder === item.idOrder),
-                  orderParticipants: orderParticipants.filter((x: OrderParticipantTO) => x.idOrder === item.idOrder),
+                  user: users.find((x: UserTO) => x.id === item.idUser),
+                  orderItems: orderItems.filter((x: OrderItemTO) => x.idOrder === item.id),
+                  orderParticipants: orderParticipants.filter((x: OrderParticipantTO) => x.idOrder === item.id),
                 }
               })
-            //console.log("Todas las promesas se han resuelto:", orders);
+            console.log("Todas las promesas se han resuelto:", orders);
             return orders
         })
         .catch((error) => {
@@ -99,7 +99,18 @@ class OrderManager {
             .catch((error) => {
                 console.error("Al menos una promesa ha fallado:", error);
                 throw error
-              });
+            });
+    }
+
+    async findAllXUser(idUser: number): Promise<OrderTO[]> {
+        return this.findAllComplete()
+            .then((orders: OrderTO[]) => {
+                return orders.filter((order: OrderTO) => order.idUser === idUser)
+            })
+            .catch((error) => {
+                console.error("Error al intentar traer pedidos del usuario:", error);
+                throw error
+            });
     }
 
 }

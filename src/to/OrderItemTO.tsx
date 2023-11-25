@@ -3,7 +3,7 @@ import ProductTO from "./ProductTO";
 import MeasureTO from "./MeasureTO";
 
 export default class OrderItemTO {
-    idOrderItem?: number;
+    id?: number;
     idOrder?: number;
     idProduct?: number;
     ammount?: number;
@@ -16,7 +16,7 @@ export default class OrderItemTO {
     measure?: MeasureTO;
 
     constructor(
-        idOrderItem?: number,
+        id?: number,
         idOrder?: number,
         idProduct?: number,
         ammount?: number,
@@ -28,7 +28,7 @@ export default class OrderItemTO {
         product?: ProductTO,
         measure?: MeasureTO
     ) {
-        this.idOrderItem = idOrderItem;
+        this.id = id;
         this.idOrder = idOrder;
         this.idProduct = idProduct;
         this.ammount = ammount;

@@ -2,7 +2,7 @@ import UserTO from "./UserTO";
 import OrderParticipantTO from "./OrderParticipantTO";
 
 export default class ParticipationTO {
-    idParticipation?: number;
+    id?: number;
     idUser?: number;
     idOrderParticipant?: number;
     createdAt?: string;
@@ -11,7 +11,7 @@ export default class ParticipationTO {
     orderParticipant?: OrderParticipantTO;
 
     constructor(
-        idParticipation?: number, 
+        id?: number, 
         idUser?: number,
         idOrderParticipant?: number,
         createdAt?: string, 
@@ -19,7 +19,7 @@ export default class ParticipationTO {
         user?: UserTO,
         orderParticipant?: OrderParticipantTO
     ) {
-        this.idParticipation = idParticipation;
+        this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.idUser = idUser;

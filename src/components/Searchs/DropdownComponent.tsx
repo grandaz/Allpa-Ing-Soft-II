@@ -34,7 +34,7 @@ function DropdownComponent(props: DropdownComponentProps) {
     <Dropdown label={nombreProducto} dismissOnClick={true}>
       {
         productos.map((item, key) => (
-          <Dropdown.Item key={key} onClick={() => handleEnviarIdProduct(item.idProduct, item.name)}>{item.name}</Dropdown.Item>
+          <Dropdown.Item key={key} onClick={() => handleEnviarIdProduct(item.id, item.name)}>{item.name}</Dropdown.Item>
         ))
       }
     </Dropdown>

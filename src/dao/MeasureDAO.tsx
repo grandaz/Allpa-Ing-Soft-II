@@ -27,7 +27,7 @@ class MeasureDAO {
             const list = response.data.map((item: any) => {
                 const measureTO = new MeasureTO();
 
-                measureTO.idMeasure = item.idMeasure
+                measureTO.id = item.id
                 measureTO.name = item.name
                 measureTO.createdAt = item.createdAt
                 measureTO.updatedAt = item.updatedAt
@@ -50,7 +50,7 @@ class MeasureDAO {
 
             const measureTO = new MeasureTO()
 
-            measureTO.idMeasure = response.data.idMeasure
+            measureTO.id = response.data.id
             measureTO.name = response.data.name
             measureTO.createdAt = response.data.createdAt
             measureTO.updatedAt = response.data.updatedAt

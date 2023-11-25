@@ -152,7 +152,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
     const orderTO = new OrderTO()
     let orderId: number;
 
-    orderTO.idUser = this.user.idUser
+    orderTO.idUser = this.user.id
     orderTO.title = this.state.titulo
     orderTO.description = this.state.descripcion
     orderTO.deliveryDate = this.state.fecha_entrega
@@ -164,7 +164,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
 
     orderManager.create(orderTO)
       .then(data => {
-        orderId = data.idOrder;
+        orderId = data.id;
         console.log(orderId);
         console.log(data)
 
@@ -186,6 +186,12 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
       .then((results) => {
         console.log('Order items created successfully:', results);
       })
+      .then(() => {
+        window.location.replace('/pedidos');
+      })
+      .catch((error) => {
+        console.error('Error creando pedido:', error);
+      });
 
     /*
     orderManager.create(orderTO)
@@ -257,7 +263,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600"
                 >
                   {this.state.productos.map((element) => (
-                    <option key={element.idProduct} value={element.idProduct}>
+                    <option key={element.id} value={element.id}>
                       {element.name}
                     </option>
                   ))}
@@ -286,7 +292,7 @@ class CrearPedidoPage extends Component<CrearPedidoPageProps, CrearPedidoPageSta
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-primary-600 focus:border-primary-600"
                 >
                   {this.state.unidades.map((element) => (
-                    <option key={element.idMeasure} value={element.idMeasure}>
+                    <option key={element.id} value={element.id}>
                       {element.name}
                     </option>
                   ))}

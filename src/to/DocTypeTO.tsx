@@ -1,17 +1,17 @@
 export default class DocTypeTO {
 
-    idDocType?: number;
+    id?: number;
     name?: string;
     createdAt?: string;
     updatedAt?: string;
 
     constructor(
-        idDocType?: number, 
+        id?: number, 
         name?: string, 
         createdAt?: string, 
         updatedAt?: string
     ) {
-        this.idDocType = idDocType;
+        this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

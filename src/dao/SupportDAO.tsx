@@ -27,7 +27,7 @@ class SupportDAO {
             const list = response.data.map((item: any) => {
                 const supportTO = new SupportTO();
 
-                supportTO.idSupport = item.idSupport
+                supportTO.id = item.id
                 supportTO.firstName = item.firstName
                 supportTO.lastName = item.lastName
                 supportTO.idProblemType = item.idProblemType
@@ -54,7 +54,7 @@ class SupportDAO {
 
             const supportTO = new SupportTO()
 
-            supportTO.idSupport = response.data.idSupport
+            supportTO.id = response.data.id
             supportTO.firstName = response.data.firstName
             supportTO.lastName = response.data.lastName
             supportTO.idProblemType = response.data.idProblemType

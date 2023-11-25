@@ -1,5 +1,5 @@
 export default class SupportTO {
-    idSupport?: number;
+    id?: number;
     firstName?: string;
     lastName?: string;
     idProblemType?: number;
@@ -9,7 +9,7 @@ export default class SupportTO {
     updatedAt?: string;
 
     constructor(
-        idSupport?: number,
+        id?: number,
         firstName?: string,
         lastName?: string,
         idProblemType?: number,
@@ -18,7 +18,7 @@ export default class SupportTO {
         createdAt?: string,
         updatedAt?: string,
     ) {
-        this.idSupport = idSupport;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.idProblemType = idProblemType;

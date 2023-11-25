@@ -1,5 +1,5 @@
 export default class ProductTO {
-    idProduct?: number;
+    id?: number;
     name?: string;
     image?: string;
     description?: string;
@@ -7,14 +7,14 @@ export default class ProductTO {
     updatedAt?: string;
 
     constructor(
-        idProduct?: number, 
+        id?: number, 
         name?: string, 
         image?: string, 
         description?: string,
         createdAt?: string, 
         updatedAt?: string
     ) {
-        this.idProduct = idProduct;
+        this.id = id;
         this.name = name;
         this.image = image;
         this.description = description;

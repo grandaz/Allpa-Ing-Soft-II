@@ -27,7 +27,7 @@ class ProductDAO {
             const list = response.data.map((item: any) => {
                 const productTO = new ProductTO();
 
-                productTO.idProduct = item.idProduct
+                productTO.id = item.id
                 productTO.name = item.name
                 productTO.image = item.image
                 productTO.description = item.description
@@ -52,7 +52,7 @@ class ProductDAO {
 
             const productTO = new ProductTO()
 
-            productTO.idProduct = response.data.idProduct
+            productTO.id = response.data.id
             productTO.name = response.data.name
             productTO.image = response.data.image
             productTO.description = response.data.description

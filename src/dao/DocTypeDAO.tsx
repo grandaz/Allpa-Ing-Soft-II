@@ -27,7 +27,7 @@ class DocTypeDAO {
             const list = response.data.map((item: any) => {
                 const docTypeTO = new DocTypeTO();
 
-                docTypeTO.idDocType = item.idDocType
+                docTypeTO.id = item.id
                 docTypeTO.name = item.name
                 docTypeTO.createdAt = item.createdAt
                 docTypeTO.updatedAt = item.updatedAt
@@ -50,7 +50,7 @@ class DocTypeDAO {
 
             const docTypeTO = new DocTypeTO()
 
-            docTypeTO.idDocType = response.data.idDocType
+            docTypeTO.id = response.data.id
             docTypeTO.name = response.data.name
             docTypeTO.createdAt = response.data.createdAt
             docTypeTO.updatedAt = response.data.updatedAt

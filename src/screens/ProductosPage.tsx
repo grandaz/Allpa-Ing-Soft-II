@@ -44,7 +44,7 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
             <div className="flex flex-wrap gap-20 justify-center">
                 {
                     this.state.productos.map((producto) => (
-                        <CardProducto key={producto.idProduct} nombre={producto.name ?? ''} image={producto.image ?? ''}></CardProducto>
+                        <CardProducto key={producto.id} nombre={producto.name ?? ''} image={producto.image ?? ''}></CardProducto>
                     ))
                 }
             </div>

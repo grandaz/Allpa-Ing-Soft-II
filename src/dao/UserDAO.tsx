@@ -27,7 +27,7 @@ class UserDAO {
             const list = response.data.map((item: any) => {
                 const userTO = new UserTO();
 
-                userTO.idUser = item.idUser
+                userTO.id = item.id
                 userTO.firstName = item.firstName
                 userTO.lastName = item.lastName
                 userTO.idDocType = item.idDocType
@@ -57,7 +57,7 @@ class UserDAO {
 
             const userTO = new UserTO()
 
-            userTO.idUser = response.data.idUser
+            userTO.id = response.data.id
             userTO.firstName = response.data.firstName
             userTO.lastName = response.data.lastName
             userTO.idDocType = response.data.idDocType

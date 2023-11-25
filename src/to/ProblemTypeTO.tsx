@@ -1,15 +1,15 @@
 export default class ProblemTypeTO {
-    idProblemType?: number;
+    id?: number;
     name?: string;
     createdAt?: string;
     updatedAt?: string;
 
-    constructor(idProblemType?: number, 
+    constructor(id?: number, 
         name?: string, 
         createdAt?: string, 
         updatedAt?: string
     ) {
-        this.idProblemType = idProblemType;
+        this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
