@@ -28,7 +28,7 @@ class OrderParticipantDAO {
                 const orderParticipantTO = new OrderParticipantTO();
 
                 orderParticipantTO.id = item.id
-                orderParticipantTO.idOrder = item.idOrder
+                orderParticipantTO.idOrderItem = item.idOrderItem
                 orderParticipantTO.idUser = item.idUser
                 orderParticipantTO.idProduct = item.idProduct
                 orderParticipantTO.ammount = item.ammount
@@ -54,7 +54,7 @@ class OrderParticipantDAO {
             const orderParticipantTO = new OrderParticipantTO()
 
             orderParticipantTO.id = response.data.id
-            orderParticipantTO.idOrder = response.data.idOrder
+            orderParticipantTO.idOrderItem = response.data.idOrderItem
             orderParticipantTO.idUser = response.data.idUser
             orderParticipantTO.idProduct = response.data.idProduct
             orderParticipantTO.ammount = response.data.ammount

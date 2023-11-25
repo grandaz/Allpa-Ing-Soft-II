@@ -1,6 +1,7 @@
 import OrderTO from "./OrderTO";
 import ProductTO from "./ProductTO";
 import MeasureTO from "./MeasureTO";
+import OrderParticipantTO from "./OrderParticipantTO";
 
 export default class OrderItemTO {
     id?: number;
@@ -14,6 +15,7 @@ export default class OrderItemTO {
     order?: OrderTO;
     product?: ProductTO;
     measure?: MeasureTO;
+    orderParticipants?: OrderParticipantTO[];
 
     constructor(
         id?: number,

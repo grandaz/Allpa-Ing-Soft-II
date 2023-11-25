@@ -38,7 +38,7 @@ export default class App extends Component {
           <Route path='/misPedidos' component={MisPedidosPage} />
           <Route path='/soporte' component={SupportPage} />
           <Route path='/crearPedido' component={CrearPedidoPage} />
-          <Route path='/detallePedido' component={QuickViewPedido} />
+          <Route path='/detallePedido/:id' component={QuickViewPedido} />
           <Route path='/edit' component={EditProfilePage} />
           <Route path='/pedidosProducto' component={PedidosxProductoPage} />
           <Route path='/pedidosUsuario' component={EditProfilePage} />

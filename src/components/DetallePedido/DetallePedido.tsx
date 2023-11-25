@@ -1,179 +1,230 @@
-import { useState } from 'react'
+import { Component, ReactNode, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import SliderSizes from '../Inputs/SliderSizes'
 import ProgressBar from '../Inputs/ProgressBar'
 import InputField from '../Inputs/InputField'
+import { RouteComponentProps } from 'react-router-dom';
 
-const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
-const reviews = { href: '#', average: 4, totalCount: 117 }
+import OrderManager from '../../manager/OrderManager'
+import OrderTO from '../../to/OrderTO'
+import ProductTO from '../../to/ProductTO'
+import UserTO from '../../to/UserTO'
+import OrderItemTO from '../../to/OrderItemTO'
+import OrderParticipantTO from '../../to/OrderParticipantTO'
+import OrderItemManager from '../../manager/OrderItemManager'
+import ParticipationManager from '../../manager/ParticipationManager'
+import OrderParticipantManager from '../../manager/OrderParticipantManager'
+import ParticipationTO from '../../to/ParticipationTO'
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+
+interface DetallePedidoProps extends RouteComponentProps<{ id: string }> {}
+
+interface DetallePedidoState{
+  listaProductosForm: OrderItemTO[];
+  id: number
+  order: OrderTO
 }
 
-export default function DetallePedido() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+export default class DetallePedido extends Component<DetallePedidoProps, DetallePedidoState> {
+  
+  private userItem = localStorage.getItem("user");
+    private user: UserTO = this.userItem !== null ? JSON.parse(this.userItem) : new UserTO();
 
-  return (
-    <div className="bg-white">
-      <div className="pt-6">
-        <nav aria-label="Breadcrumb">
-          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-            <li className="text-sm">
-              <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
-              </a>
-            </li>
-          </ol>
-        </nav>
+  constructor(props: DetallePedidoProps) {
+    super(props)
+    
+    
+    this.state = {
+      listaProductosForm: [],
+      id: 0,
+      order: new OrderTO(),
 
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount(): void {
+    const { id } = this.props.match.params
+    const numeroId = parseInt(id, 10)
+
+    this.setState({ id: numeroId }, () => {
+      
+      this.cargarOrden();
+    })
+    
+  }
+
+  private cargarOrden() {
+    const orderManager = new OrderManager()
+    console.log(this.state.id)
+    orderManager.findOneComplete(this.state.id)
+      .then((data: OrderTO) => {
+        this.setState({
+          order: data,
+          listaProductosForm: data.orderItems ?? []
+        })
+      })
+
+  }
+
+  private handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, idProducto: number,) {
+    this.setState((prevState) => ({
+      listaProductosForm: prevState.listaProductosForm.map((item) => {
+        if (item.idProduct === idProducto) {
+          return {
+            ...item,
+            [event.target.name]: event.target.value,
+          };
+        }
+        return item;
+      }),
+    }));
+  }
+
+  private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    this.state.listaProductosForm.map(async (values: OrderItemTO) => {
+      const orderParticipantTO = new OrderParticipantTO()
+
+      orderParticipantTO.idOrderItem = values.id
+      orderParticipantTO.idUser = this.user.id
+      orderParticipantTO.idProduct = values.idProduct
+      orderParticipantTO.ammount = values.ammount
+
+      const orderParticipantManager = new OrderParticipantManager()
+      return orderParticipantManager.create(orderParticipantTO)
+        .then((data: OrderParticipantTO) => {
+          const participationTO = new ParticipationTO()
+
+          participationTO.idOrderParticipant = data.id
+          participationTO.idUser = this.user.id
+
+          const participationManager = new ParticipationManager()
+          return participationManager.create(participationTO)
+        })
+        .then((results) => {
+          console.log('Participation created successfully:', results);
+        })
+        .then(() => {
+          window.location.replace('/pedidos');
+        })
+        .catch((error) => {
+          console.error('Error registrando participación:', error);
+        });
         
+    })
 
-        {/* Product info */}
-        <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
-          </div>
+  }
 
-          {/* Fecha entrega */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
-            <p className="text-3xl tracking-tight text-gray-900">FECHA ENTREGA</p>
-
-            {/* Progress */}
-            <div className="mt-6">
-              <ProgressBar></ProgressBar>
+  render() {
+    return (
+      <>
+      
+      <div className="mt-6"></div>
+      <div className="bg-white">
+        <div className="pt-6">
+          
+          {/* TITULO */}
+          <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+            <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{this.state.order.title}</h1>
             </div>
-
-            <form className="mt-10">
-              {/* Productos */}
-              <div className='mb-5'>
-                <h3 className="text-sm font-medium text-gray-900">Producto 1   ( S/2 por kg )  </h3>
-                <SliderSizes></SliderSizes>
+  
+            {/* Fecha entrega */}
+            <div className="mt-4 lg:row-span-3 lg:mt-0">
+              <p className="text-3xl tracking-tight text-gray-900">{this.state.order.deliveryDate?.substring(0,10)}</p>
+  
+              {/* Progress */}
+              {/*
+                <div className="mt-6">
+                <ProgressBar></ProgressBar>
               </div>
+              */
+              }
+              
+  
+              <form className="mt-8" onSubmit={this.handleSubmit}>
+                {/* Productos */}
 
-              <div className='mb-5'>
-                <h3 className="text-sm font-medium text-gray-900">Producto 1   ( S/2 por kg )  </h3>
-                <SliderSizes></SliderSizes>
-              </div>
-
-              <div className='mb-5'>
-                <h3 className="text-sm font-medium text-gray-900">Producto 1   ( S/2 por kg )  </h3>
-                <SliderSizes></SliderSizes>
-              </div>
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-8 py-3 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none"
-              >
-                Inscribirse
-              </button>
-            </form>
-          </div>
-
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-            {/* Description and details */}
-            <div>
-              <h3 className="sr-only">Description</h3>
-              <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
-              </div>
+                { 
+                  this.state.order.orderItems?.map((item: OrderItemTO) => (
+                    <div key={item.id}>
+                      <p className="text-base font-bold text-gray-900 mb-1 flex"> {item.product?.name}: ({
+                        item.orderParticipants?.reduce((total, x: OrderParticipantTO) => total + (x.ammount ?? 0), 0)
+                      } / {item.ammount} {item.measure?.name}) </p>
+                      <div className='mb-5 flex gap-2'>
+                        <h3 className="text-sm font-medium text-gray-900 mt-2"> S/{item.price} por {item.measure?.name} </h3>
+                        <div className=''>
+                          <InputField type="number" min={0} max={
+                            (item.ammount ?? 0) - (item.orderParticipants?.reduce((total, x: OrderParticipantTO) => total + (x.ammount ?? 0), 0) ?? 0)
+                          } name="ammount" onChange={(event) => this.handleInputChange(event, item.idProduct ?? 0)}></InputField>
+                        </div>
+                        <h3 className="text-sm font-medium text-gray-900 mt-2">Max {
+                          (item.ammount ?? 0) - (item.orderParticipants?.reduce((total, x: OrderParticipantTO) => total + (x.ammount ?? 0), 0) ?? 0)
+                        } {item.measure?.name} </h3>
+                      </div>
+                    </div>
+                  ))
+                  
+                }
+  
+                <button
+                  type="submit"
+                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-8 py-3 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none"
+                >
+                  Inscribirse
+                </button>
+              </form>
             </div>
-
-            <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-
-              <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
+  
+            <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+              {/* Descripcion */}
+              <div>
+                <h3 className="sr-only">Descripción</h3>
+                <div className="space-y-6">
+                  <p className="text-base text-gray-900">{this.state.order.description}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
+  
+  
+              {/* LISTAR PRODUCTOS */}
+              <div className="mt-10">
+                <h3 className="text-sm font-medium text-gray-900">Productos</h3>
+  
+                <div className="mt-4">
+                  <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                    {
+                      this.state.order.orderItems?.map((item: OrderItemTO) => (
+                        <li key={item.id} className="text-gray-400">
+                        <span className="text-gray-600">{item.product?.name}</span>
+                      </li>
+                      ))
+                    }
+                  </ul>
+                </div>
               </div>
+              {
+                /*
+                  <div className="mt-10">
+                <h2 className="text-sm font-medium text-gray-900">Details</h2>
+  
+                <div className="mt-4 space-y-6">
+                  <p className="text-sm text-gray-600">{product.details}</p>
+                </div>
+              </div>
+                
+                */
+              }
+              
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+      </>
+    )
+  }
 }
