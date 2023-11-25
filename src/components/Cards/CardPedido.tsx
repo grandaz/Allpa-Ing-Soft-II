@@ -10,7 +10,6 @@ import { Component } from "react"
 
 
 interface CardPedidoProps {
-  id: number
   profileImage: string
   nombre: string
   fechaCrea: string
@@ -62,7 +61,7 @@ class CardPedido extends Component<CardPedidoProps> {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <a href={"/detallePedido/" + this.props.id}><GreenButton type="button" label="Inscribirse"></GreenButton></a>
+          <a href="/detallePedido"><GreenButton type="button" label="Inscribirse"></GreenButton></a>
         </CardFooter>
       </Card>
     )
