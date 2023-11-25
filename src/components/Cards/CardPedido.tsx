@@ -16,6 +16,7 @@ interface CardPedidoProps {
   titulo: string
   descripcion: string
   fechaEntrega: string
+  onEliminarPedido: (pedidoId: number) => void;
 }
 
 class CardPedido extends Component<CardPedidoProps> {

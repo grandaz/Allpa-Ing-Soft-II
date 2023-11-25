@@ -68,6 +68,18 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
     this.buscarProducto(eleccion);
   }
 
+  private handleEliminarPedido = (pedidoId: number) => {
+    const orderManager = new OrderManager();
+
+    orderManager.remove(pedidoId)
+      .then(() => {
+        this.cargarPedidos();
+      })
+      .catch((error) => {
+        console.error("Error eliminando pedido:", error);
+      });
+  };
+
   render() {
     return (
       /*      
@@ -113,6 +125,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
               titulo={pedido.title ?? ''}
               descripcion={pedido.description ?? ''}
               fechaEntrega={pedido.deliveryDate?.substring(0,10) ?? ''}
+              onEliminarPedido={this.handleEliminarPedido}
             ></CardPedido>
           ))}
         </div>
