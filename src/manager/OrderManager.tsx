@@ -54,7 +54,7 @@ class OrderManager {
                   ...item,
                   user: users.find((x: UserTO) => x.id === item.idUser),
                   orderItems: orderItems.filter((x: OrderItemTO) => x.idOrder === item.id),
-                  orderParticipants: orderParticipants.filter((x: OrderParticipantTO) => x.idOrder === item.id),
+                  orderParticipants: orderParticipants.filter((x: OrderParticipantTO) => x.idOrderItem === item.id),
                 }
               })
             console.log("Todas las promesas se han resuelto:", orders);
@@ -112,6 +112,33 @@ class OrderManager {
                 throw error
             });
     }
+
+    async findOneComplete(id: number): Promise<OrderTO> {
+        
+        const userManager = new UserManager()
+        const orderItemManager = new OrderItemManager()
+
+        return Promise.all([
+            this.findOne(id),
+            userManager.findAll(),
+            orderItemManager.findAllComplete(),
+        ])
+        .then(([orderData, users, orderItems]) => {
+
+            orderData.user = users.find((x: UserTO) => x.id === orderData.idUser)
+            orderData.orderItems = orderItems.filter((x: OrderItemTO) => x.idOrder === orderData.id)
+
+            console.log("Todas las promesas se han resuelto:", orderData);
+            return orderData
+        })
+        .catch((error) => {
+            console.error("Al menos una promesa ha fallado:", error);
+            throw error
+          });
+        
+
+    }
+    
 
 }
 
