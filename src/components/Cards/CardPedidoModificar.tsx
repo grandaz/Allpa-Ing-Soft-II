@@ -23,7 +23,14 @@ class CardPedidoModificar extends Component<CardPedidoProps> {
     super(props);
   }
 
+  
+
+  
+
   render() {
+    const redirect = () => {
+      window.location.href = '/detallePedido';
+    }
     return (
       <Card className="w-96">
         <CardHeader shadow={false} floated={false} className="h-26">
@@ -60,7 +67,8 @@ class CardPedidoModificar extends Component<CardPedidoProps> {
         </CardBody>
         <CardFooter className="pt-0">
           <div className="flex">
-            <GreenButton type="button" label="Modificar"></GreenButton>
+            <GreenButton type="button" label="Modificar" onClick={redirect}>
+            </GreenButton>
             <div className="w-4"></div>
             <GreenButton type="button" label="Eliminar"></GreenButton>
           </div>

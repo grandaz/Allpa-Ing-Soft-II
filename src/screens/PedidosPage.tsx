@@ -6,6 +6,7 @@ import DefaultProfile from '../assets/default_profile.jpg'
 import SearchBar from "../components/Searchs/SearchBar";
 import DropdownComponent from "../components/Searchs/DropdownComponent";
 
+import GreenButton from "../components/Inputs/GreenButton";
 import OrderTO from "../to/OrderTO"
 import OrderManager from "../manager/OrderManager"
 
@@ -13,6 +14,7 @@ interface PedidosPageState {
     pedidos: OrderTO[]
     filtroIdProducto: number
     filtroNombre: string
+    filtroID: number
 }
 
 interface PedidosPageProps {}
@@ -24,11 +26,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         this.state = {
             pedidos: [],
             filtroIdProducto: 0,
-            filtroNombre: ''
+            filtroNombre: '',
+            filtroID:0
         }
 
         this.obtenerIdProduct = this.obtenerIdProduct.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.obtenerIdUser = this.obtenerIdUser.bind(this);
     }
 
     componentDidMount() {
@@ -59,6 +63,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         
     }
 
+    private obtenerIdUser(idUser: any) {
+        this.setState({ filtroID: idUser }, () => {
+            this.cargarPedidos()
+            console.log(idUser)
+        })
+    }
+
     private handleSearch(searchValue: any) {
         this.setState({ filtroNombre: searchValue }, () => {
             this.cargarPedidos()
@@ -75,6 +86,9 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
                     <DropdownComponent enviarIdProduct={this.obtenerIdProduct}></DropdownComponent>
                     <div className="w-5/6">
                         <SearchBar onSearch={this.handleSearch}></SearchBar>
+                    </div>
+                    <div className="w-10%">
+                    <a href="/historialPedidos"><GreenButton type="button" label="Mis pedidos"></GreenButton></a>
                     </div>
                 </div>
                 
