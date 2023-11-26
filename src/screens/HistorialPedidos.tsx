@@ -70,8 +70,6 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                             </div>
                         </div>
                         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                <GreenButton label="Modificar"></GreenButton>
-
                             <p className="text-sm leading-6 text-gray-900">Fecha de entrega: {pedido.deliveryDate?.substring(0,10)}</p>
                             {pedido.fgState == '0' ? (
                                 <div className="mt-1 flex items-center gap-x-1.5">
