@@ -1,6 +1,7 @@
 import { Component } from "react";
 import OrderManager from "../manager/OrderManager";
 import OrderTO from "../to/OrderTO";
+import GreenButton from "../components/Inputs/GreenButton";
 
 interface HistorialPedidosProps { }
 
@@ -29,11 +30,23 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
             })
     }
 
+    private handleEliminar(idPed: number) {
+        const orderManager = new OrderManager()
+
+        orderManager.remove(idPed)
+            .then(() => {
+                console.log("Eliminado")
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+
     render() {
         return (
             <>
             <div className="mt-24"></div>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Mis Pedidos</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos realizados</h2>
             <ul role="list" className="divide-y divide-gray-100 mx-48">
                 {this.state.pedidos.map((pedido: OrderTO) => (
                     <li key={pedido.id} className="flex justify-between gap-x-6 py-5">
@@ -61,6 +74,7 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                                     <p className="text-xs leading-5 text-gray-500">En curso</p>
                                 </div>
                             )}
+                            <GreenButton label="Eliminar" onClick={() => this.handleEliminar(pedido.id ?? 0)}></GreenButton>
                         </div>
                     </li>
                 ))}

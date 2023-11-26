@@ -1,21 +1,21 @@
 import { Component, ReactNode, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
-import SliderSizes from '../Inputs/SliderSizes'
-import ProgressBar from '../Inputs/ProgressBar'
-import InputField from '../Inputs/InputField'
+import SliderSizes from '../components/Inputs/SliderSizes'
+import ProgressBar from '../components/Inputs/ProgressBar'
+import InputField from '../components/Inputs/InputField'
 import { RouteComponentProps } from 'react-router-dom';
 
-import OrderManager from '../../manager/OrderManager'
-import OrderTO from '../../to/OrderTO'
-import ProductTO from '../../to/ProductTO'
-import UserTO from '../../to/UserTO'
-import OrderItemTO from '../../to/OrderItemTO'
-import OrderParticipantTO from '../../to/OrderParticipantTO'
-import OrderItemManager from '../../manager/OrderItemManager'
-import ParticipationManager from '../../manager/ParticipationManager'
-import OrderParticipantManager from '../../manager/OrderParticipantManager'
-import ParticipationTO from '../../to/ParticipationTO'
+import OrderManager from '../manager/OrderManager'
+import OrderTO from '../to/OrderTO'
+import ProductTO from '../to/ProductTO'
+import UserTO from '../to/UserTO'
+import OrderItemTO from '../to/OrderItemTO'
+import OrderParticipantTO from '../to/OrderParticipantTO'
+import OrderItemManager from '../manager/OrderItemManager'
+import ParticipationManager from '../manager/ParticipationManager'
+import OrderParticipantManager from '../manager/OrderParticipantManager'
+import ParticipationTO from '../to/ParticipationTO'
 
 
 interface DetallePedidoProps extends RouteComponentProps<{ id: string }> {}
@@ -29,7 +29,7 @@ interface DetallePedidoState{
 export default class DetallePedido extends Component<DetallePedidoProps, DetallePedidoState> {
   
   private userItem = localStorage.getItem("user");
-    private user: UserTO = this.userItem !== null ? JSON.parse(this.userItem) : new UserTO();
+  private user: UserTO = this.userItem !== null ? JSON.parse(this.userItem) : new UserTO();
 
   constructor(props: DetallePedidoProps) {
     super(props)

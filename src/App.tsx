@@ -12,8 +12,10 @@ import CrearPedidoPage from './screens/CrearPedidoPage'
 import LandingNavBar from './components/NavBar/LandingNavBar'
 import EditProfilePage from './screens/EditProfilePage'
 import { Component } from 'react'
-import QuickViewPedido from './components/DetallePedido/DetallePedido'
+import DetallePedido from './screens/DetallePedidoPage'
 import HistorialPedidos from './screens/HistorialPedidos'
+import DetalleProductoPage from './screens/DetalleProductoPage'
+import RestablecerContraPage from './screens/RestablecerContraPage'
 
 
 export default class App extends Component {
@@ -36,10 +38,12 @@ export default class App extends Component {
           <Route path='/misPedidos' component={MisPedidosPage} />
           <Route path='/soporte' component={SupportPage} />
           <Route path='/crearPedido' component={CrearPedidoPage} />
-          <Route path='/detallePedido/:id' component={QuickViewPedido} />
+          <Route path='/detallePedido/:id' component={DetallePedido} />
           <Route path='/edit' component={EditProfilePage} />
           <Route path='/pedidosUsuario' component={EditProfilePage} />
           <Route path='/historialPedidos' component={HistorialPedidos} />
+          <Route path='/detalleProducto/:id' component={DetalleProductoPage} />
+          <Route path='/restablecerContra' component={RestablecerContraPage} />
         </Switch>
       </Router>
     )

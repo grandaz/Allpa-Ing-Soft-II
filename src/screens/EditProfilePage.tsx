@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import UserManager from '../manager/UserManager';
 import UserTO from '../to/UserTO';
+import { Link } from 'react-router-dom';
 
 interface EditProfilePageProps {}
 
@@ -95,6 +96,10 @@ interface EditProfilePageState {
     window.location.replace('/inicio');
   }
 
+  private handleHistorial() {
+    window.location.replace('/historialPedidos');
+  }
+
   render() {
     return (
       <>
@@ -138,6 +143,7 @@ interface EditProfilePageState {
           </div>
           <div className='flex gap-48 mx-20'>
             <GreenButton label="Guardar"></GreenButton>
+            <GreenButton type="button" label="Historial" onClick={this.handleHistorial}></GreenButton>
             <GreenButton type="button" label="Cerrar sesión" onClick={this.handleCerrarSesion}></GreenButton>
           </div>
           
