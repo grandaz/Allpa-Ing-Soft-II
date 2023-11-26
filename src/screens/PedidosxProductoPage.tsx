@@ -126,7 +126,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
               titulo={pedido.title ?? ''}
               descripcion={pedido.description ?? ''}
               fechaEntrega={pedido.deliveryDate?.substring(0,10) ?? ''}
-              onEliminarPedido={this.handleEliminarPedido}
+              //onEliminarPedido={this.handleEliminarPedido}
             ></CardPedido>
           ))}
         </div>

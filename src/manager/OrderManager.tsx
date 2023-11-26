@@ -75,7 +75,7 @@ class OrderManager {
                 let finalList
                 if (idProduct == 0 && name != '') {
                     console.log('filtrar solo por nombre')
-                    finalList = orders.filter((order: OrderTO) => order.user?.firstName === name);
+                    finalList = orders.filter((order: OrderTO) => order.user?.firstName?.includes(name));
                 } else if (idProduct != 0 && name == '') {
                     // filtrar solo por producto
                     console.log('filtrar solo por producto')
@@ -84,7 +84,7 @@ class OrderManager {
                       });
                 } else if (idProduct != 0 && name != '') {
                     console.log('filtrar por ambos')
-                    const tmpList = orders.filter((order: OrderTO) => order.user?.firstName === name);
+                    const tmpList = orders.filter((order: OrderTO) => order.user?.firstName?.includes(name));
                     finalList = tmpList.filter((order: OrderTO) => {
                         return order.orderItems?.some((item: OrderItemTO) => item.idProduct === idProduct);
                     });
