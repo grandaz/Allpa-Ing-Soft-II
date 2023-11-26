@@ -11,11 +11,9 @@ import SupportPage from './screens/SupportPage'
 import CrearPedidoPage from './screens/CrearPedidoPage'
 import LandingNavBar from './components/NavBar/LandingNavBar'
 import EditProfilePage from './screens/EditProfilePage'
-import PedidosxProductoPage from './screens/PedidosxProductoPage'
 import { Component } from 'react'
 import QuickViewPedido from './components/DetallePedido/DetallePedido'
 import HistorialPedidos from './screens/HistorialPedidos'
-import Pruebas from './screens/Pruebas'
 
 
 export default class App extends Component {
@@ -40,10 +38,8 @@ export default class App extends Component {
           <Route path='/crearPedido' component={CrearPedidoPage} />
           <Route path='/detallePedido/:id' component={QuickViewPedido} />
           <Route path='/edit' component={EditProfilePage} />
-          <Route path='/pedidosProducto' component={PedidosxProductoPage} />
           <Route path='/pedidosUsuario' component={EditProfilePage} />
           <Route path='/historialPedidos' component={HistorialPedidos} />
-          <Route path='/pruebas' component={Pruebas} />
         </Switch>
       </Router>
     )
