@@ -30,6 +30,7 @@ class ParticipationDAO {
                 participationTO.id = item.id
                 participationTO.idUser = item.idUser
                 participationTO.idOrderParticipant = item.idOrderParticipant
+                participationTO.idOrder = item.idOrder
                 participationTO.createdAt = item.createdAt
                 participationTO.updatedAt = item.updatedAt
 
@@ -54,6 +55,7 @@ class ParticipationDAO {
             participationTO.id = response.data.id
             participationTO.idUser = response.data.idUser
             participationTO.idOrderParticipant = response.data.idOrderParticipant
+            participationTO.idOrder = response.data.idOrder
             participationTO.createdAt = response.data.createdAt
             participationTO.updatedAt = response.data.updatedAt
 

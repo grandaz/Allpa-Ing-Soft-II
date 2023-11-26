@@ -9,6 +9,7 @@ import GreenButton from "../Inputs/GreenButton";
 import { Component } from "react"
 
 interface CardProductoProps {
+    idProducto: number,
     nombre: string;
     image: string;
 }
@@ -54,7 +55,10 @@ class CardProducto extends Component<CardProductoProps> {
                 */}
                 </CardBody>
                 <CardFooter className="pt-0">
-                    <a href={this.user !== null ? "/crearPedido" : "/login"}><GreenButton type="button" label="Añadir"></GreenButton></a>
+                    <div className="flex gap-2">
+                        <a href={this.user !== null ? "/crearPedido" : "/login"}><GreenButton type="button" label="Añadir"></GreenButton></a>
+                        <a href={"/detalleProducto/" + this.props.idProducto}><GreenButton type="button" label="Ver detalle"></GreenButton></a>
+                    </div>
                 </CardFooter>
             </Card>
         )

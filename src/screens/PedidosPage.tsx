@@ -77,30 +77,32 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
       <>
         <div className="mt-20"></div>
 
-                <div className="flex gap-4 mx-10">
-                    <DropdownComponent enviarIdProduct={this.obtenerIdProduct}></DropdownComponent>
-                    <div className="w-5/6">
-                        <SearchBar onSearch={this.handleSearch}></SearchBar>
-                    </div>
-                </div>
-                
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos</h2>
-                <div className="flex flex-wrap gap-20 justify-center mx-auto">
-                    {this.state.pedidos.map(pedido => (
-                            <CardPedido 
-                                key={pedido.id}
-                                profileImage={pedido.user?.profileImage ?? DefaultProfile} 
-                                nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
-                                fechaCrea={pedido.createdAt?.substring(0,10) ?? ''}
-                                titulo={pedido.title ?? ''}
-                                descripcion={pedido.description ?? ''}
-                                fechaEntrega={pedido.deliveryDate?.substring(0,10) ?? ''}
-                            ></CardPedido>
-                        ))}
-                </div>
-            </>
-        )
-    }
+        <div className="flex gap-4 mx-10">
+          <DropdownComponent enviarIdProduct={this.obtenerIdProduct}></DropdownComponent>
+          <div className="w-5/6">
+            <SearchBar onSearch={this.handleSearch}></SearchBar>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos</h2>
+        <div className="flex flex-wrap gap-20 justify-center mx-auto">
+          {this.state.pedidos.map(pedido => (
+            <CardPedido
+              key={pedido.id}
+              id={pedido.id ?? 0 }
+              profileImage={pedido.user?.profileImage ?? DefaultProfile}
+              nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
+              fechaCrea={pedido.createdAt?.substring(0, 10) ?? ''}
+              titulo={pedido.title ?? ''}
+              descripcion={pedido.description ?? ''}
+              fechaEntrega={pedido.deliveryDate?.substring(0, 10) ?? ''}
+              onEliminarPedido={this.handleEliminarPedido}
+            ></CardPedido>
+          ))}
+        </div>
+      </>
+    );
+  }
 }
 
 export default PedidosPage;

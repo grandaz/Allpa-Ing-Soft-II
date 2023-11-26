@@ -2,6 +2,8 @@ import { Component } from "react";
 import OrderManager from "../manager/OrderManager";
 import OrderTO from "../to/OrderTO";
 import GreenButton from "../components/Inputs/GreenButton";
+import { useHistory} from "react-router-dom";
+
 
 interface HistorialPedidosProps { }
 
@@ -31,13 +33,32 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                 this.setState({ pedidos: data })
             })
     }
-    
+
+    private handleEliminar(idPed: number) {
+        const orderManager = new OrderManager()
+
+        const pedido = this.state.pedidos.find((x: OrderTO) => x.id === idPed)
+
+        if(pedido?.orderParticipants?.length != 0) {
+            alert('No se puede eliminar un pedido con participaciones')
+            return false   
+        }
+
+        orderManager.remove(idPed)
+            .then(() => {
+                console.log("Eliminado")
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+
     render() {
         
         return (
             <>
             <div className="mt-24"></div>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Mis Pedidos</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8">Pedidos realizados</h2>
             <ul role="list" className="divide-y divide-gray-100 mx-48">
                 {this.state.pedidos.map((pedido: OrderTO) => (
                     <li key={pedido.id} className="flex justify-between gap-x-6 py-5">
@@ -50,7 +71,7 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                             </div>
                         </div>
                         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                
+                                <GreenButton label="Modificar"></GreenButton>
 
                             <p className="text-sm leading-6 text-gray-900">Fecha de entrega: {pedido.deliveryDate?.substring(0,10)}</p>
                             {pedido.fgState == '0' ? (
@@ -68,6 +89,10 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                                     <p className="text-xs leading-5 text-gray-500">En curso</p>
                                 </div>
                             )}
+                            <div className="flex gap-2">
+                            <a href={"/modificarPedido/" + pedido.id}><GreenButton type="button" label="Modificar"></GreenButton></a>
+                            <GreenButton label="Eliminar" onClick={() => this.handleEliminar(pedido.id ?? 0)}></GreenButton>
+                            </div>
                         </div>
                     </li>
                 ))}

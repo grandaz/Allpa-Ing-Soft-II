@@ -33,7 +33,7 @@ class OrderParticipantManager {
         return this.orderParticipantDAO.remove(id.toString())
     }
 
-    async findAllComplete(): Promise<ProductTO[]> {
+    async findAllComplete(): Promise<OrderParticipantTO[]> {
         
         const productManager = new ProductManager()
         const orderItemManager = new OrderItemManager()
@@ -41,7 +41,7 @@ class OrderParticipantManager {
         return Promise.all([
             this.findAll(),
             productManager.findAll(),
-            orderItemManager.findAllComplete()
+            orderItemManager.findAllAndOrder()
         ])
         .then(([orderParticipations, products, orderItems]) => {
 
