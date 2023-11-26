@@ -86,6 +86,7 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
           {this.state.pedidos.map(pedido => (
             <CardPedido
               key={pedido.id}
+              id={0} 
               profileImage={pedido.user?.profileImage ?? DefaultProfile}
               nombre={pedido.user?.firstName + ' ' + pedido.user?.lastName}
               fechaCrea={pedido.createdAt?.substring(0, 10) ?? ''}
