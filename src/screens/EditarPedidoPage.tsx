@@ -105,7 +105,7 @@ class EditarPedidoPage extends Component<EditarPedidoPageProps, EditarPedidoPage
         return (
             <>
                 <div className="mt-24"></div>
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8 ml-48">Edita tu perfil</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 m-8 ml-48">Edita tu pedido</h2>
                 <form className="mx-48 my-10" onSubmit={this.handleSubmit}>
                     <div className="mb-5">
                         <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">
