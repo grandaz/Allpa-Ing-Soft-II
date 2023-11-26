@@ -128,7 +128,7 @@ class EditarPedidoPage extends Component<EditarPedidoPageProps, EditarPedidoPage
                             defaultValue={this.state.pedido.address}
                         ></InputField>
                     </div>
-                    <div className='flex gap-48 mx-20'>
+                    <div className='flex gap-48 mx-96 '>
                         <GreenButton label="Guardar"></GreenButton>
                     </div>
 
