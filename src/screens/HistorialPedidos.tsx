@@ -88,7 +88,7 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                                 </div>
                             )}
                             <div className="flex gap-2">
-                            <a href={"/modificarPedido/" + pedido.id}><GreenButton type="button" label="Modificar"></GreenButton></a>
+                            <a href={"/editarPedido/" + pedido.id}><GreenButton type="button" label="Modificar"></GreenButton></a>
                             <GreenButton label="Eliminar" onClick={() => this.handleEliminar(pedido.id ?? 0)}></GreenButton>
                             </div>
                         </div>
