@@ -50,6 +50,7 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
           {this.state.productos.map((producto) => (
             <div key={producto.id}>
               <CardProducto
+                idProducto={0}
                 nombre={producto.name ?? ""}
                 image={producto.image ?? ""}
               ></CardProducto>
