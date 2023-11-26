@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 
 import UserManager from '../manager/UserManager';
 import UserTO from '../to/UserTO';
-import { Link } from 'react-router-dom';
 
 interface EditProfilePageProps {}
 
@@ -131,13 +130,13 @@ interface EditProfilePageState {
             <label htmlFor="nombre" className="block mb-2 text-sm font-medium text-gray-900">
               Nombre
             </label>
-            <InputField name="nombre" type={'text'} defaultValue={this.state.loggedInUser.firstName} onChange={this.handleInputChange}></InputField>
+            <InputField name="nombre" data-testid="nombre" type={'text'} defaultValue={this.state.loggedInUser.firstName} onChange={this.handleInputChange}></InputField>
           </div>
           <div className="mb-5">
             <label htmlFor="apellido" className="block mb-2 text-sm font-medium text-gray-900">
               Apellido
             </label>
-            <InputField name="apellido" type={'text'} defaultValue={this.state.loggedInUser.lastName} onChange={this.handleInputChange}></InputField>
+            <InputField name="apellido" data-testid="apellido" type={'text'} defaultValue={this.state.loggedInUser.lastName} onChange={this.handleInputChange}></InputField>
           </div>
           <div className="mb-5">
         <label htmlFor="numero" className="block mb-2 text-sm font-medium text-gray-900">
@@ -146,6 +145,7 @@ interface EditProfilePageState {
         <InputField
           name="numero"
           type="text"
+          data-testid="numero"
           onChange={this.handleInputChange}
           defaultValue={this.state.loggedInUser.telephone}   
                 ></InputField>
@@ -158,14 +158,15 @@ interface EditProfilePageState {
               type="file"
               accept=".jpg, .jpeg"
               name="imagen"
+              data-testid="imagen"
               onChange={this.handleImageChange}
               className="border border-gray-300 p-2 rounded-md"
             />
           </div>
           <div className='flex gap-48 mx-20'>
-            <GreenButton label="Guardar"></GreenButton>
-            <GreenButton type="button" label="Historial" onClick={this.handleHistorial}></GreenButton>
-            <GreenButton type="button" label="Cerrar sesión" onClick={this.handleCerrarSesion}></GreenButton>
+            <GreenButton data-testid="botonGuardar" label="Guardar"></GreenButton>
+            <GreenButton data-testid="botonHistorial" type="button" label="Historial" onClick={this.handleHistorial}></GreenButton>
+            <GreenButton data-testid="botonCerrarSesion" type="button" label="Cerrar sesión" onClick={this.handleCerrarSesion}></GreenButton>
           </div>
           
         </form>
