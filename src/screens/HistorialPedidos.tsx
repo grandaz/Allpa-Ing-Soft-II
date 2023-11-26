@@ -33,6 +33,13 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
     private handleEliminar(idPed: number) {
         const orderManager = new OrderManager()
 
+        const pedido = this.state.pedidos.find((x: OrderTO) => x.id === idPed)
+
+        if(pedido?.orderParticipants?.length != 0) {
+            alert('No se puede eliminar un pedido con participaciones')
+            return false   
+        }
+
         orderManager.remove(idPed)
             .then(() => {
                 console.log("Eliminado")
@@ -74,7 +81,10 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                                     <p className="text-xs leading-5 text-gray-500">En curso</p>
                                 </div>
                             )}
+                            <div className="flex gap-2">
+                            <a href={"/modificarPedido/" + pedido.id}><GreenButton type="button" label="Modificar"></GreenButton></a>
                             <GreenButton label="Eliminar" onClick={() => this.handleEliminar(pedido.id ?? 0)}></GreenButton>
+                            </div>
                         </div>
                     </li>
                 ))}

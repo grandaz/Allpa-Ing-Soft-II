@@ -16,6 +16,7 @@ import DetallePedido from './screens/DetallePedidoPage'
 import HistorialPedidos from './screens/HistorialPedidos'
 import DetalleProductoPage from './screens/DetalleProductoPage'
 import RestablecerContraPage from './screens/RestablecerContraPage'
+import MisParticipaciones from './screens/MisParticipaciones'
 
 
 export default class App extends Component {
@@ -44,6 +45,7 @@ export default class App extends Component {
           <Route path='/historialPedidos' component={HistorialPedidos} />
           <Route path='/detalleProducto/:id' component={DetalleProductoPage} />
           <Route path='/restablecerContra' component={RestablecerContraPage} />
+          <Route path='/misParticipaciones' component={MisParticipaciones} />
         </Switch>
       </Router>
     )

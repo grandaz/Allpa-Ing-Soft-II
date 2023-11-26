@@ -97,8 +97,8 @@ class LandingNavBar extends Component <LandingNavBarProps> {
                                 this.user !== null ? (
                                     <li>
                                     <Link
-                                        to="/misPedidos"
-                                        className={`block py-2 pl-3 pr-4 ${this.props.location.pathname === '/misPedidos'
+                                        to="/misParticipaciones"
+                                        className={`block py-2 pl-3 pr-4 ${this.props.location.pathname === '/misParticipaciones'
                                             ? 'md:text-emerald-700'
                                             : 'md:hover:text-emerald-700'
                                             } md:p-0`}
