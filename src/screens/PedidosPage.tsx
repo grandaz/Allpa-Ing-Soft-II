@@ -3,29 +3,31 @@ import { Component } from "react";
 import DefaultProfile from '../assets/default_profile.jpg';
 import SearchBar from "../components/Searchs/SearchBar";
 import DropdownComponent from "../components/Searchs/DropdownComponent";
-import OrderTO from "../to/OrderTO";
-import OrderManager from "../manager/OrderManager";
+
+import OrderTO from "../to/OrderTO"
+import OrderManager from "../manager/OrderManager"
 
 interface PedidosPageState {
-  pedidos: OrderTO[];
-  filtroIdProducto: number;
-  filtroNombre: string;
+    pedidos: OrderTO[]
+    filtroIdProducto: number
+    filtroNombre: string
 }
 
 interface PedidosPageProps {}
 
 class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
-  constructor(props: PedidosPageProps) {
-    super(props);
-    this.state = {
-      pedidos: [],
-      filtroIdProducto: 0,
-      filtroNombre: ''
-    }
 
-    this.obtenerIdProduct = this.obtenerIdProduct.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
+    constructor(props: PedidosPageProps) {
+        super(props);
+        this.state = {
+            pedidos: [],
+            filtroIdProducto: 0,
+            filtroNombre: ''
+        }
+
+        this.obtenerIdProduct = this.obtenerIdProduct.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+    }
 
   componentDidMount() {
     this.cargarPedidos();
@@ -43,12 +45,13 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
       });
   }
 
-  private obtenerIdProduct(idProduct: any) {
-    this.setState({ filtroIdProducto: idProduct }, () => {
-      this.cargarPedidos();
-      console.log(idProduct);
-    });
-  }
+    private obtenerIdProduct(idProduct: any) {
+        this.setState({ filtroIdProducto: idProduct }, () => {
+            this.cargarPedidos()
+            console.log(idProduct)
+        })
+        
+    }
 
   private handleSearch(searchValue: any) {
     this.setState({ filtroNombre: searchValue }, () => {

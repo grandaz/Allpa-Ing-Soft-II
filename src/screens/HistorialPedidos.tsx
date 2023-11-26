@@ -2,6 +2,8 @@ import { Component } from "react";
 import OrderManager from "../manager/OrderManager";
 import OrderTO from "../to/OrderTO";
 import GreenButton from "../components/Inputs/GreenButton";
+import { useHistory} from "react-router-dom";
+
 
 interface HistorialPedidosProps { }
 
@@ -9,11 +11,12 @@ interface HistorialPedidosState {
     pedidos: OrderTO[]
 }
 
+
 export default class HistorialPedidos extends Component<HistorialPedidosProps, HistorialPedidosState> {
 
     private userItem = localStorage.getItem("user");
     private user = this.userItem !== null ? JSON.parse(this.userItem) : null;
-
+    
     constructor(props: HistorialPedidosProps) {
         super(props)
         this.state = {
@@ -50,6 +53,7 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
     }
 
     render() {
+        
         return (
             <>
             <div className="mt-24"></div>
@@ -62,9 +66,12 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
                             <div className="min-w-0 flex-auto">
                                 <p className="text-sm font-semibold leading-6 text-gray-900">{pedido.title}</p>
                                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{pedido.description}</p>
+                                <p className="text-sm leading-6 text-gray-900">{pedido.address}</p>
                             </div>
                         </div>
                         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <GreenButton label="Modificar"></GreenButton>
+
                             <p className="text-sm leading-6 text-gray-900">Fecha de entrega: {pedido.deliveryDate?.substring(0,10)}</p>
                             {pedido.fgState == '0' ? (
                                 <div className="mt-1 flex items-center gap-x-1.5">
