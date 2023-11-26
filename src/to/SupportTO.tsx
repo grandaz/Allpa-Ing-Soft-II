@@ -2,6 +2,7 @@ export default class SupportTO {
     id?: number;
     firstName?: string;
     lastName?: string;
+    email?: string;
     idProblemType?: number;
     description?: string;
     fgPresential?: string;
