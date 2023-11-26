@@ -6,6 +6,8 @@ import MeasureManager from "./MeasureManager";
 import OrderParticipantManager from "./OrderParticipantManager";
 import ProductManager from "./ProductManager";
 import MeasureTO from "../to/MeasureTO";
+import OrderManager from "./OrderManager";
+import OrderTO from "../to/OrderTO";
 
 class OrderItemManager {
 
@@ -55,6 +57,32 @@ class OrderItemManager {
                   product: products.find((x: ProductTO) => x.id === item.idProduct),
                   orderParticipants: orderParticipantsData.filter((x: OrderParticipantTO) => x.idOrderItem === item.id),
                   measure: measures.find((x: MeasureTO) => x.id === item.idMeasure)
+                }
+              })
+            console.log("Todas las promesas se han resuelto orderItem:", orderItems);
+            return orderItems
+        })
+        .catch((error) => {
+            console.error("Al menos una promesa ha fallado:", error);
+            throw error
+          });
+
+    }
+
+    async findAllAndOrder(): Promise<OrderItemTO[]> {
+
+        const orderManager = new OrderManager()
+        
+        return Promise.all([
+            this.findAll(),
+            orderManager.findAll(),
+        ])
+        .then(([ordersItemsData, orderData]) => {
+
+            const orderItems = ordersItemsData.map((item: OrderItemTO) => {
+                return {
+                  ...item,
+                  order: orderData.find((x: OrderTO) => x.id === item.idOrder)
                 }
               })
             console.log("Todas las promesas se han resuelto orderItem:", orderItems);

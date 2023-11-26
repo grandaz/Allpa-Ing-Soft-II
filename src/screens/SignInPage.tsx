@@ -10,6 +10,9 @@ interface SignInPageState {
     first_name: string;
     last_name: string;
     email: string;
+    doctypeId: number,
+    document: string,
+    tel: string,
     password: string;
 }
 
@@ -21,6 +24,9 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
             first_name: '',
             last_name: '',
             email: '',
+            doctypeId: 0,
+            document: '',
+            tel: '',
             password: '',
         }
 
@@ -45,6 +51,9 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
         userTO.firstName = this.state.first_name
         userTO.lastName = this.state.last_name
         userTO.email = this.state.email
+        userTO.noDoc = this.state.document
+        userTO.telephone = this.state.tel
+        userTO.idDocType = 1
         userTO.password = this.state.password
 
         console.log(JSON.stringify(userTO));
@@ -95,6 +104,14 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
                                     <input onChange={this.handleInputChange} type="text" name="last_name" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:border-primary-600 block w-full p-2.5" placeholder="Last name" required></input>
                                 </div>
                                 <div>
+                                    <label htmlFor="tel" className="block mb-2 text-sm font-medium text-gray-900">Teléfono</label>
+                                    <input onChange={this.handleInputChange} type="text" name="tel" id="tel" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:border-primary-600 block w-full p-2.5" placeholder="Teléfono" required></input>
+                                </div>
+                                <div>
+                                    <label htmlFor="document" className="block mb-2 text-sm font-medium text-gray-900">Nro. DNI</label>
+                                    <input onChange={this.handleInputChange} type="text" name="document" id="document" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:border-primary-600 block w-full p-2.5" placeholder="Nro. DNI" required></input>
+                                </div>
+                                <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
                                     <input onChange={this.handleInputChange} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:border-primary-600 block w-full p-2.5" required></input>
                                 </div>
@@ -114,6 +131,7 @@ class SignInPage extends Component<SignInPageProps, SignInPageState> {
                                 <p className="text-sm font-light text-gray-500">
                                     Already have an account? <a href="/login" className="font-medium text-primary-600 hover:underline">Login here</a>
                                 </p>
+                                
                             </form>
                         </div>
                     </div>

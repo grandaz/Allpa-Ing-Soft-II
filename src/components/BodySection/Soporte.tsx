@@ -1,6 +1,104 @@
 import { Component } from "react"
+import SupportTO from "../../to/SupportTO"
+import SupportManager from "../../manager/SupportManager"
+import ProblemTypeTO from "../../to/ProblemTypeTO"
+import ProblemTypeManager from "../../manager/ProblemTypeManager"
 
-class Soporte extends Component{
+
+interface SoporteProps{}
+
+interface SoporteState{
+    tipoProblemas: ProblemTypeTO[]
+    nombre: string
+    apellido: string
+    email: string
+    tipo: number
+    descripcion: string
+    fgPresential: string
+    checked: boolean
+}
+
+class Soporte extends Component<SoporteProps, SoporteState>{
+
+    constructor(props: SoporteProps){
+        super(props)
+        this.state = {
+            tipoProblemas: [],
+            nombre: '',
+            apellido: '',
+            email: '',
+            tipo: 0,
+            descripcion: '',
+            fgPresential: '0',
+            checked: false
+        }
+        this.handleCheckBox = this.handleCheckBox.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);   
+    }
+    
+    componentDidMount() {
+        this.cargarTipoProblemas()
+    }
+
+
+
+    private cargarTipoProblemas() {
+        const problemTypeManager = new ProblemTypeManager()
+        problemTypeManager.findAll()
+            .then((data: ProblemTypeTO[]) => {
+                this.setState({ tipoProblemas: data })
+            })
+    }
+
+    private handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target;
+        console.log(name)
+        this.setState({
+          [name]: value,
+        } as unknown as Pick<SoporteState, keyof SoporteState>);
+      }
+
+    private handleCheckBox(event: React.ChangeEvent<HTMLInputElement>) {
+        if(event.target.checked) {
+            this.setState({ fgPresential: '1' , checked: true})
+        }else {
+            this.setState({ fgPresential: '0', checked: false})
+        }
+        
+    }
+
+    private handleSelectChange (event: React.ChangeEvent<HTMLSelectElement>) {
+        this.setState({ tipo: Number(event.target.value) });
+      };
+
+    private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+
+        event.preventDefault();
+
+        const supportManager = new SupportManager()
+
+        const supportTO = new SupportTO()
+        supportTO.firstName = this.state.nombre
+        supportTO.lastName = this.state.apellido
+        supportTO.email = this.state.email
+        supportTO.idProblemType = this.state.tipo
+        supportTO.description = this.state.descripcion
+        supportTO.fgPresential = this.state.fgPresential
+        console.log(supportTO)
+        supportManager.create(supportTO)
+            .then((data) => {
+                console.log('Creado supp:', data)
+            })
+            .then(() => {
+                window.location.replace('/soporte');
+              })
+            .catch((err) => {
+                console.error('Error al crear supp:', err)
+            })
+
+    }
 
     render() {
         return (
@@ -22,35 +120,44 @@ class Soporte extends Component{
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Soporte
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action="/soporte">
+                        <form className="space-y-4 md:space-y-6" onSubmit={this.handleSubmit}>
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su nombre"></input>
+                                <input onChange={this.handleInputChange} type="text" name="nombre" id="nombre" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su nombre"></input>
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
-                                <input type="text" name="apellido" id="apellido" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su apellido"></input>
+                                <input onChange={this.handleInputChange} type="text" name="apellido" id="apellido" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su apellido"></input>
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo electrónico</label>
-                                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nombre@compañía.com"></input>
+                                <input onChange={this.handleInputChange} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nombre@compañía.com"></input>
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de problema</label>
-                                <input list="browsers" name="tipo" id="tipo" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tipo de problema"></input>
-                                    <datalist id="browsers">
-                                        <option value="Sistema de pago">No puedo realizar el pago</option>
-                                        <option value="Pedidos vigentes">No visualizo mis pedidos</option>
-                                        <option value="Producto en el sistema">No encuentro el producto que deseo</option>                            
-                                    </datalist>
+
+                                <select
+                                    onChange={this.handleSelectChange}
+                                    placeholder="Tipo de problema"
+                                    value={this.state.tipo}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value={0} disabled>Selecciona un tipo de problema</option>
+                                        {this.state.tipoProblemas.map((item: ProblemTypeTO) => (
+                                        <option key={item.id} value={item.id}>
+                                        {item.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-                                <input type="text" name="descripcion" id="descripcion" className="h-40 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe el problema aquí"></input>
+                                <input onChange={this.handleInputChange} type="text" name="descripcion" id="descripcion" className="h-40 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe el problema aquí"></input>
                             </div>
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
-                                    <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"></input>
+                                    <input id="terms" checked={this.state.checked} onChange={this.handleCheckBox} aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"></input>
                                 </div>
                                 <div className="ml-3 text-sm">
                                     <label  className="font-light text-gray-500 dark:text-gray-300">Deseo recibir ayuda presencial</label>

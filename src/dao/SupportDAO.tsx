@@ -30,6 +30,7 @@ class SupportDAO {
                 supportTO.id = item.id
                 supportTO.firstName = item.firstName
                 supportTO.lastName = item.lastName
+                supportTO.email = item.email
                 supportTO.idProblemType = item.idProblemType
                 supportTO.description = item.description
                 supportTO.fgPresential = item.fgPresential
@@ -57,6 +58,7 @@ class SupportDAO {
             supportTO.id = response.data.id
             supportTO.firstName = response.data.firstName
             supportTO.lastName = response.data.lastName
+            supportTO.email = response.data.email
             supportTO.idProblemType = response.data.idProblemType
             supportTO.description = response.data.description
             supportTO.fgPresential = response.data.fgPresential
