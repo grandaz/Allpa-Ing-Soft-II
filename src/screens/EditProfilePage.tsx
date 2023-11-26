@@ -69,9 +69,30 @@ interface EditProfilePageState {
     
     event.preventDefault();
 
+    if(this.state.numero.length!=9){
+      alert('Telefono invalido');
+      return false
+    }
+
+    if(this.state.apellido.includes('!'))
+    {
+      alert('Apellido invalido')
+      return false
+    }
+
+    if(this.state.nombre.includes('!'))
+    {
+      alert('Nombre invalido')
+      return false
+    }
+
+    if(this.state.nombre.length>30){
+      alert('Nombre invalido, muy largo')
+      return false
+    }
     const userManager = new UserManager()
     const userTO = this.state.loggedInUser
-    
+
     userTO.firstName = this.state.nombre
     userTO.lastName = this.state.apellido
     userTO.telephone = this.state.numero

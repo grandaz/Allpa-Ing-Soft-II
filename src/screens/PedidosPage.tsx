@@ -1,12 +1,9 @@
-import CardPedido from "../components/Cards/CardPedido"
-import { Component } from "react"
-import DefaultProfile from '../assets/default_profile.jpg'
-//import GreenButton from "../components/Inputs/GreenButton"
-//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import CardPedido from "../components/Cards/CardPedido";
+import { Component } from "react";
+import DefaultProfile from '../assets/default_profile.jpg';
 import SearchBar from "../components/Searchs/SearchBar";
 import DropdownComponent from "../components/Searchs/DropdownComponent";
 
-import GreenButton from "../components/Inputs/GreenButton";
 import OrderTO from "../to/OrderTO"
 import OrderManager from "../manager/OrderManager"
 
@@ -14,7 +11,6 @@ interface PedidosPageState {
     pedidos: OrderTO[]
     filtroIdProducto: number
     filtroNombre: string
-    filtroID: number
 }
 
 interface PedidosPageProps {}
@@ -26,34 +22,28 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         this.state = {
             pedidos: [],
             filtroIdProducto: 0,
-            filtroNombre: '',
-            filtroID:0
+            filtroNombre: ''
         }
 
         this.obtenerIdProduct = this.obtenerIdProduct.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.obtenerIdUser = this.obtenerIdUser.bind(this);
     }
 
-    componentDidMount() {
-        this.cargarPedidos();
-    }
+  componentDidMount() {
+    this.cargarPedidos();
+  }
 
-    private cargarPedidos() {
+  private cargarPedidos() {
+    const orderManager = new OrderManager();
 
-        const orderManager = new OrderManager()
-
-        orderManager.findAllXProductXUser(this.state.filtroIdProducto, this.state.filtroNombre)
-            .then((data) => {
-
-                this.setState({ pedidos: data, filtroNombre: '' });
-                //console.log(data);
-            })
-            .catch((error) => {
-                console.error("Error cargando pedidos:", error);
-            });  
-    }
-
+    orderManager.findAllXProductXUser(this.state.filtroIdProducto, this.state.filtroNombre)
+      .then((data) => {
+        this.setState({ pedidos: data, filtroNombre: '' });
+      })
+      .catch((error) => {
+        console.error("Error cargando pedidos:", error);
+      });
+  }
 
     private obtenerIdProduct(idProduct: any) {
         this.setState({ filtroIdProducto: idProduct }, () => {
@@ -63,32 +53,34 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
         
     }
 
-    private obtenerIdUser(idUser: any) {
-        this.setState({ filtroID: idUser }, () => {
-            this.cargarPedidos()
-            console.log(idUser)
-        })
-    }
+  private handleSearch(searchValue: any) {
+    this.setState({ filtroNombre: searchValue }, () => {
+      this.cargarPedidos();
+      console.log(searchValue);
+    });
+  }
 
-    private handleSearch(searchValue: any) {
-        this.setState({ filtroNombre: searchValue }, () => {
-            this.cargarPedidos()
-            console.log(searchValue)
-        })
-    }
+  private handleEliminarPedido = (pedidoId: number) => {
+    const orderManager = new OrderManager();
 
-    render() {
-        return (
-            <>
-                <div className="mt-20"></div>
+    orderManager.remove(pedidoId)
+      .then(() => {
+        this.cargarPedidos();
+      })
+      .catch((error) => {
+        console.error("Error eliminando pedido:", error);
+      });
+  };
+
+  render() {
+    return (
+      <>
+        <div className="mt-20"></div>
 
                 <div className="flex gap-4 mx-10">
                     <DropdownComponent enviarIdProduct={this.obtenerIdProduct}></DropdownComponent>
                     <div className="w-5/6">
                         <SearchBar onSearch={this.handleSearch}></SearchBar>
-                    </div>
-                    <div className="w-10%">
-                    <a href="/historialPedidos"><GreenButton type="button" label="Mis pedidos"></GreenButton></a>
                     </div>
                 </div>
                 
@@ -111,4 +103,4 @@ class PedidosPage extends Component<PedidosPageProps, PedidosPageState> {
     }
 }
 
-export default PedidosPage
+export default PedidosPage;

@@ -31,6 +31,7 @@ class OrderItemDAO {
                 orderItemTO.idOrder = item.idOrder
                 orderItemTO.idProduct = item.idProduct
                 orderItemTO.ammount = item.ammount
+                orderItemTO.price = item.price
                 orderItemTO.idMeasure = item.idMeasure
                 orderItemTO.createdAt = item.createdAt
                 orderItemTO.updatedAt = item.updatedAt
@@ -57,6 +58,7 @@ class OrderItemDAO {
             orderItemTO.idOrder = response.data.idOrder
             orderItemTO.idProduct = response.data.idProduct
             orderItemTO.ammount = response.data.ammount
+            orderItemTO.price = response.data.price
             orderItemTO.idMeasure = response.data.idMeasure
             orderItemTO.createdAt = response.data.createdAt
             orderItemTO.updatedAt = response.data.updatedAt
