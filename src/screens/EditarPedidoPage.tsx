@@ -77,7 +77,14 @@ class EditarPedidoPage extends Component<EditarPedidoPageProps, EditarPedidoPage
             alert('Título invalido');
             return false
         }
-
+        if (this.state.description.includes('!')) {
+            alert('Descripción invalida');
+        return false
+    }
+    if (this.state.address.includes('!')) {
+        alert('Dirección invalida');
+        return false}
+        
         const orderManager = new OrderManager()
         const orderTO = this.state.pedido
 
