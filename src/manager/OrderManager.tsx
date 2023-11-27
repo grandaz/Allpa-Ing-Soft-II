@@ -6,6 +6,8 @@ import OrderParticipantManager from "./OrderParticipantManager";
 import UserTO from "../to/UserTO";
 import OrderItemTO from "../to/OrderItemTO";
 import OrderParticipantTO from "../to/OrderParticipantTO";
+import ParticipationManager from "./ParticipationManager";
+import ParticipationTO from "../to/ParticipationTO";
 
 class OrderManager {
 
@@ -40,14 +42,16 @@ class OrderManager {
         const userManager = new UserManager()
         const orderItemManager = new OrderItemManager()
         const orderParticipantManager = new OrderParticipantManager()
+        const participationManager = new ParticipationManager()
 
         return Promise.all([
             this.orderDAO.findAll(),
             userManager.findAll(),
             orderItemManager.findAll(),
-            orderParticipantManager.findAll()
+            orderParticipantManager.findAll(),
+            participationManager.findAll()
         ])
-        .then(([ordersData, users, orderItems, orderParticipants]) => {
+        .then(([ordersData, users, orderItems, orderParticipants, participaciones]) => {
 
             const orders = ordersData.map((item: OrderTO) => {
                 return {
@@ -55,6 +59,7 @@ class OrderManager {
                   user: users.find((x: UserTO) => x.id === item.idUser),
                   orderItems: orderItems.filter((x: OrderItemTO) => x.idOrder === item.id),
                   orderParticipants: orderParticipants.filter((x: OrderParticipantTO) => x.idOrderItem === item.id),
+                  participations: participaciones.filter((x: ParticipationTO) => x.idOrder === item.id)
                 }
               })
             console.log("Todas las promesas se han resuelto:", orders);

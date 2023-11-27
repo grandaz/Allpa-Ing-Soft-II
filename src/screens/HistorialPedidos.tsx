@@ -3,6 +3,8 @@ import OrderManager from "../manager/OrderManager";
 import OrderTO from "../to/OrderTO";
 import GreenButton from "../components/Inputs/GreenButton";
 import { useHistory} from "react-router-dom";
+import OrderItemManager from "../manager/OrderItemManager";
+import OrderItemTO from "../to/OrderItemTO";
 
 
 interface HistorialPedidosProps { }
@@ -26,6 +28,10 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
     }
 
     componentDidMount(): void {
+        this.cargarPedidos()
+    }
+
+    private cargarPedidos() {
         const orderManager = new OrderManager()
 
         orderManager.findAllXUser(this.user.id)
@@ -35,22 +41,45 @@ export default class HistorialPedidos extends Component<HistorialPedidosProps, H
     }
 
     private handleEliminar(idPed: number) {
-        const orderManager = new OrderManager()
+        
 
         const pedido = this.state.pedidos.find((x: OrderTO) => x.id === idPed)
 
-        if(pedido?.orderParticipants?.length != 0) {
+        console.log(pedido?.orderParticipants?.length)
+
+        if(pedido?.participations?.length != 0) {
             alert('No se puede eliminar un pedido con participaciones')
             return false   
         }
 
-        orderManager.remove(idPed)
+        const removePromises = pedido.orderItems?.map(async (item: OrderItemTO) => {
+            const orderItemManager = new OrderItemManager()
+            return orderItemManager.remove(item.id ?? 0)
+                .then((data) => {
+                    console.log('Item eliminado')
+                    return data
+                })
+                .catch((err) => {
+                    console.error('Error eliminar item:', err)
+                    throw err
+                })
+        }) || []
+        
+        Promise.all(removePromises)
             .then(() => {
-                console.log("Eliminado")
+                const orderManager = new OrderManager()
+                orderManager.remove(idPed)
+                .then(() => {
+                    console.log("Eliminado")
+                    this.cargarPedidos()
+                })
+                .catch((err) => {
+                    console.error('Error eliminar pedido:', err)
+                })
             })
-            .catch((err) => {
-                console.error(err)
-            })
+            
+        
+        
     }
 
     render() {

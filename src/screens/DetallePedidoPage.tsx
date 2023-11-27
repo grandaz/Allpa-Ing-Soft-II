@@ -102,6 +102,7 @@ export default class DetallePedido extends Component<DetallePedidoProps, Detalle
 
           participationTO.idOrderParticipant = data.id
           participationTO.idUser = this.user.id
+          participationTO.idOrder = this.state.id
 
           const participationManager = new ParticipationManager()
           return participationManager.create(participationTO)

@@ -34,14 +34,14 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
         console.error("Error cargando productos:", error);
       });
   }
-
+  /*
   // Función para redirigir a PedidosPage con el filtro de IdProducto
   private filtrarPorProducto = (idProducto: number) => {
     // Puedes usar el componente Link para redirigir a la página de pedidos con el filtro deseado
     // Asegúrate de tener definida la ruta adecuada para PedidosPage en tu enrutador
     window.location.href = `/pedidos?idProducto=${idProducto}`;
-  };
-
+  };  
+*/
   render() {
     return (
       <>
@@ -50,16 +50,10 @@ class ProductosPage extends Component<ProductosPageProps, ProductosPageState> {
           {this.state.productos.map((producto) => (
             <div key={producto.id}>
               <CardProducto
-                idProducto={0}
+                idProducto={producto.id ?? 0}
                 nombre={producto.name ?? ""}
                 image={producto.image ?? ""}
               ></CardProducto>
-              <button
-                onClick={() => producto.id !== undefined && this.filtrarPorProducto(producto.id)}
-                style={{ marginTop: "10px" }}
-              >
-                Filtrar por Producto
-              </button>
             </div>
           ))}
         </div>
